@@ -44,23 +44,24 @@
 
 	:global(.key > *) {
 		white-space: nowrap;
+		user-select: none;
 	}
 
 	:global(.key > :nth-child(1)) {
 		grid-column-start: span 2;
 		color: var(--color-base);
-		font-family: var(--font-base, 'system-ui');
+		font-family: var(--font-base), 'system-ui';
 		text-align: center;
 	}
 
 	:global(.key > :nth-child(2)) {
 		color: var(--color-layer1);
-		font-family: var(--font-layer1, 'system-ui');
+		font-family: var(--font-layer1), 'system-ui';
 	}
 
 	:global(.key > :nth-child(3)) {
 		color: var(--color-layer2);
-		font-family: var(--font-layer2, 'system-ui');
+		font-family: var(--font-layer2), 'system-ui';
 		text-align: right;
 	}
 </style>

@@ -11,31 +11,30 @@
 	} from '$lib/stores/settings'
 </script>
 
-<h1>tiny idiot board</h1>
-
 <main>
+	<h1>tiny idiot board</h1>
+
 	<Keyboard />
 
 	<section class="options">
-		<h1>Options</h1>
+		<h1>Default Options</h1>
 
 		<fieldset>
-			<legend>Default</legend>
-			<div class="fonts">
+			<div class="grid">
 				<label>
-					<span>Main</span>
 					<input type="text" bind:value={$fontBase} placeholder="system-ui" />
+					<span>Main</span>
 				</label>
 				<label>
-					<span>Layer 1</span>
 					<input type="text" bind:value={$fontLayer1} placeholder="system-ui" />
+					<span>Layer 1</span>
 				</label>
 				<label>
-					<span>Layer 2</span>
 					<input type="text" bind:value={$fontLayer2} placeholder="system-ui" />
+					<span>Layer 2</span>
 				</label>
 			</div>
-			<div class="colors">
+			<div class="grid">
 				<label>
 					<input type="color" bind:value={$background} />
 					<span>Background</span>

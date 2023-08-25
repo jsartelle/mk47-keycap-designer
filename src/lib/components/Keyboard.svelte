@@ -142,13 +142,11 @@
 		<span>M</span>
 		<span slot="layer1">&lt;-Tab</span>
 		<span slot="layer2">Mute</span>
-
 	</Key>
 	<Key>
 		<span>,&lt;</span>
 		<span slot="layer1">&gt;-Tab</span>
 		<span slot="layer2">Vol-</span>
-
 	</Key>
 	<Key>
 		<span>.&gt;</span>

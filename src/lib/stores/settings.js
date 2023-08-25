@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store'
 
+/* TODO persist in localStorage */
 export const fontBase = writable()
 export const fontLayer1 = writable()
 export const fontLayer2 = writable()

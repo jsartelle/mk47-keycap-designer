@@ -1,8 +1,15 @@
 /* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
 @use '@picocss/pico/scss/pico' with (
-  $semantic-root-element: '#root',
-  $enable-semantic-container: true
+	$semantic-root-element: '#root',
+	$enable-semantic-container: true
 );
+
+/* change when Pico's grids collapse */
+@media (min-width: map-get(pico.$breakpoints, 'sm')) {
+	.grid {
+		grid-template-columns: repeat(auto-fit, minmax(0%, 1fr));
+	}
+}
 
 input:not([type='checkbox'], [type='radio']),
 select,
@@ -13,4 +20,27 @@ textarea {
 input[type='color'] {
 	padding: 0;
 	aspect-ratio: 1 / 1;
+}
+
+label {
+	position: relative;
+}
+
+label span {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+label > :is(input:not([type]), input[type='text']) {
+	margin-top: var(--spacing);
+
+	+ span {
+		position: absolute;
+		top: var(--spacing);
+		left: var(--form-element-spacing-horizontal);
+		padding: 0 var(--form-element-spacing-horizontal);
+		background: var(--background-color);
+		cursor: text;
+		transform: translateY(-50%);
+	}
 }
