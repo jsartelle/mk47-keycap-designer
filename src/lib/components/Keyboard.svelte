@@ -2,7 +2,7 @@
 	import Key from '$lib/components/Key.svelte'
 </script>
 
-<section class="keyboard container">
+<section class="keyboard">
 	<Key>
 		<span>Esc</span>
 	</Key>
