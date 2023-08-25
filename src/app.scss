@@ -1,3 +1,16 @@
 /* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
-$semantic-root-element: '#root';
-@import '@picocss/pico/scss/pico';
+@use '@picocss/pico/scss/pico' with (
+  $semantic-root-element: '#root',
+  $enable-semantic-container: true
+);
+
+input:not([type='checkbox'], [type='radio']),
+select,
+textarea {
+	width: auto;
+}
+
+input[type='color'] {
+	padding: 0;
+	aspect-ratio: 1 / 1;
+}
