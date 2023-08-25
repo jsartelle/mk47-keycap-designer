@@ -28,6 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@picocss/pico", "npm:1.5.10"],\
             ["@sveltejs/adapter-auto", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:2.1.0"],\
             ["@sveltejs/kit", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:1.23.0"],\
             ["@typescript-eslint/eslint-plugin", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:5.62.0"],\
@@ -37,6 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-svelte", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:2.33.0"],\
             ["prettier", "npm:2.8.8"],\
             ["prettier-plugin-svelte", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:2.10.1"],\
+            ["sass", "npm:1.66.1"],\
             ["svelte", "npm:4.2.0"],\
             ["svelte-check", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:3.5.0"],\
             ["tslib", "npm:2.6.2"],\
@@ -464,6 +466,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@npmcli/fs", "npm:3.1.0"],\
             ["semver", "npm:7.5.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@picocss/pico", [\
+        ["npm:1.5.10", {\
+          "packageLocation": "./.yarn/cache/@picocss-pico-npm-1.5.10-196054165f-07b2f94507.zip/node_modules/@picocss/pico/",\
+          "packageDependencies": [\
+            ["@picocss/pico", "npm:1.5.10"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2056,6 +2067,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["immutable", [\
+        ["npm:4.3.3", {\
+          "packageLocation": "./.yarn/cache/immutable-npm-4.3.3-7533be5844-313a354c8f.zip/node_modules/immutable/",\
+          "packageDependencies": [\
+            ["immutable", "npm:4.3.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["import-fresh", [\
         ["npm:3.3.0", {\
           "packageLocation": "./.yarn/cache/import-fresh-npm-3.3.0-3e34265ca9-2cacfad06e.zip/node_modules/import-fresh/",\
@@ -2545,6 +2565,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["mk47-keycap-designer", "workspace:."],\
+            ["@picocss/pico", "npm:1.5.10"],\
             ["@sveltejs/adapter-auto", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:2.1.0"],\
             ["@sveltejs/kit", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:1.23.0"],\
             ["@typescript-eslint/eslint-plugin", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:5.62.0"],\
@@ -2554,6 +2575,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-svelte", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:2.33.0"],\
             ["prettier", "npm:2.8.8"],\
             ["prettier-plugin-svelte", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:2.10.1"],\
+            ["sass", "npm:1.66.1"],\
             ["svelte", "npm:4.2.0"],\
             ["svelte-check", "virtual:1fb90879c7913e30ff7dc95b1bb340e179ce3e2f4c79b67258d92c33d6bdb47c41ff1f314f76e15693f248f2d3665d626577ca187d211e1a53d878d8d55e9237#npm:3.5.0"],\
             ["tslib", "npm:2.6.2"],\
@@ -3136,6 +3158,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["graceful-fs", "npm:4.2.11"],\
             ["mkdirp", "npm:0.5.6"],\
             ["rimraf", "npm:2.7.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["sass", [\
+        ["npm:1.66.1", {\
+          "packageLocation": "./.yarn/cache/sass-npm-1.66.1-563acb4a8f-74fc11d0fc.zip/node_modules/sass/",\
+          "packageDependencies": [\
+            ["sass", "npm:1.66.1"],\
+            ["chokidar", "npm:3.5.3"],\
+            ["immutable", "npm:4.3.3"],\
+            ["source-map-js", "npm:1.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3740,7 +3774,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lightningcss", null],\
             ["postcss", "npm:8.4.28"],\
             ["rollup", "npm:3.28.1"],\
-            ["sass", null],\
+            ["sass", "npm:1.66.1"],\
             ["stylus", null],\
             ["sugarss", null],\
             ["terser", null]\
