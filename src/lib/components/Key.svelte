@@ -1,13 +1,5 @@
 <script lang="ts">
-	import {
-		background,
-		colorBase,
-		colorLayer1,
-		colorLayer2,
-		fontBase,
-		fontLayer1,
-		fontLayer2
-	} from '$lib/stores/settings'
+	import { defaultSettings } from '$lib/stores/settings'
 
 	/** Unit width of the key (integer) */
 	export let width = 1
@@ -16,13 +8,13 @@
 <div
 	class="key"
 	style:--width={width}
-	style:--font-base={$fontBase}
-	style:--font-layer1={$fontLayer1}
-	style:--font-layer2={$fontLayer2}
-	style:--background={$background}
-	style:--color-base={$colorBase}
-	style:--color-layer1={$colorLayer1}
-	style:--color-layer2={$colorLayer2}
+	style:--font-base={$defaultSettings.fontBase}
+	style:--font-layer1={$defaultSettings.fontLayer1}
+	style:--font-layer2={$defaultSettings.fontLayer2}
+	style:--background={$defaultSettings.background}
+	style:--color-base={$defaultSettings.colorBase}
+	style:--color-layer1={$defaultSettings.colorLayer1}
+	style:--color-layer2={$defaultSettings.colorLayer2}
 >
 	<slot><span /></slot>
 	<slot name="layer1"><span /></slot>
