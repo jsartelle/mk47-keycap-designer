@@ -31,8 +31,8 @@ label > :is(input:not([type]), input[type='text']) {
 	+ span {
 		position: absolute;
 		top: var(--spacing);
-		left: var(--form-element-spacing-horizontal);
-		padding: 0 var(--form-element-spacing-horizontal);
+		left: calc(var(--form-element-spacing-horizontal) / 2);
+		padding: 0 calc(var(--form-element-spacing-horizontal) / 2);
 		background: var(--background-color);
 		cursor: text;
 		transform: translateY(-50%);
