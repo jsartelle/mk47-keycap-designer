@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Key from '$lib/components/Key.svelte'
-	import { layout } from '$lib/stores/settings'
+	import { layout } from '$lib/stores/store'
 </script>
 
 <section class="keyboard">

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Keyboard from '$lib/components/Keyboard.svelte'
-	import { defaultSettings } from '$lib/stores/settings'
+	import { defaultSettings } from '$lib/stores/store'
 </script>
 
 <main>

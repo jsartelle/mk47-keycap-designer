@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { defaultSettings } from '$lib/stores/settings'
+	import { defaultSettings } from '$lib/stores/store'
 
 	/** Unit width of the key (integer) */
 	export let width = 1
