@@ -1,14 +1,8 @@
 /* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
-@use '@picocss/pico/scss/pico' with (
-	$semantic-root-element: '#root',
-	$enable-semantic-container: true
-);
+@use 'sass:meta';
 
-/* change when Pico's grids collapse */
-@media (min-width: map-get(pico.$breakpoints, 'sm')) {
-	.grid {
-		grid-template-columns: repeat(auto-fit, minmax(0%, 1fr));
-	}
+@layer pico {
+	@include meta.load-css('pico');
 }
 
 input:not([type='checkbox'], [type='radio']),
