@@ -35,6 +35,7 @@
 		--background-as-image: linear-gradient(to bottom, var(--background), var(--background));
 		background: content-box var(--background-as-image), padding-box var(--background-dark);
 		border: 1px solid var(--background-color);
+		border-radius: var(--border-radius);
 		padding: 0.25rem;
 		aspect-ratio: var(--width) / 1;
 		grid-column-end: span var(--width, 1);
