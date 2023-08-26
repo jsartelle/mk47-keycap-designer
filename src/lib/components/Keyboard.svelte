@@ -17,6 +17,7 @@
 	.keyboard {
 		display: grid;
 		grid-template: repeat(4, minmax(0, 1fr)) / repeat(12, minmax(0, 1fr));
+		gap: calc(var(--form-element-spacing-horizontal) / 2);
 		font-size: 75%;
 	}
 </style>

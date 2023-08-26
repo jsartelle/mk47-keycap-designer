@@ -7,6 +7,7 @@
 
 <div
 	class="key"
+	data-width={width}
 	style:--width={width}
 	style:--font-base={$defaultSettings.fontBase}
 	style:--font-layer1={$defaultSettings.fontLayer1}
@@ -26,13 +27,17 @@
 		--background-dark: color-mix(in oklab, var(--background) 75%, black);
 		--background-as-image: linear-gradient(to bottom, var(--background), var(--background));
 		background: content-box var(--background-as-image), padding-box var(--background-dark);
-		border: 1px solid var(--background-color);
+		border: none;
 		border-radius: var(--border-radius);
+		margin: 0;
 		padding: 0.25rem;
-		aspect-ratio: var(--width) / 1;
 		grid-column-end: span var(--width, 1);
 		display: grid;
 		grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
+	}
+
+	.key[data-width='1'] {
+		aspect-ratio: 1 / 1;
 	}
 
 	:global(.key > *) {
