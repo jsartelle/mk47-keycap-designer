@@ -6,9 +6,9 @@
 <section class="keyboard">
 	{#each $layout as key, index}
 		<Key width={index === 41 ? 2 : 1}>
-			<span>{key[0]}</span>
-			<span slot="layer1">{key[1]}</span>
-			<span slot="layer2">{key[2]}</span>
+			<span>{key[0] ?? ''}</span>
+			<span slot="layer1">{key[1] ?? ''}</span>
+			<span slot="layer2">{key[2] ?? ''}</span>
 		</Key>
 	{/each}
 </section>
