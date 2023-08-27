@@ -43,13 +43,17 @@
 	:global(.key > *) {
 		white-space: nowrap;
 		user-select: none;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
 	}
 
 	:global(.key > :nth-child(1)) {
 		grid-column-start: span 2;
 		color: var(--color-base);
 		font-family: var(--font-base), 'system-ui';
-		text-align: center;
+		font-size: 1.25em;
+		justify-content: flex-start;
 	}
 
 	:global(.key > :nth-child(2)) {
