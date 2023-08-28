@@ -17,10 +17,10 @@ export const defaultSettings = writable<KeySettings>({
 	fontBase: '',
 	fontLayer1: '',
 	fontLayer2: '',
-	background: '#000000',
-	colorBase: '#ffffff',
-	colorLayer1: '#ffffff',
-	colorLayer2: '#ffffff',
+	background: '#19181a',
+	colorBase: '#ccdfee',
+	colorLayer1: '#8d0eec',
+	colorLayer2: '#43a7fc',
 })
 
 export const layout = writable<KeyLegend[]>([
