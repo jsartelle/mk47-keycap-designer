@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { defaultSettings, type KeySettings } from '$lib/stores/store'
+	import { defaultKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { Writable } from 'svelte/store'
 
 	/** Unit width of the key (integer) */
@@ -11,13 +11,13 @@
 	class="key"
 	data-width={width}
 	style:--width={width}
-	style:--font-base={$settings.fontBase ?? $defaultSettings.fontBase}
-	style:--font-layer1={$settings.fontLayer1 ?? $defaultSettings.fontLayer1}
-	style:--font-layer2={$settings.fontLayer2 ?? $defaultSettings.fontLayer2}
-	style:--background={$settings.background ?? $defaultSettings.background}
-	style:--color-base={$settings.colorBase ?? $defaultSettings.colorBase}
-	style:--color-layer1={$settings.colorLayer1 ?? $defaultSettings.colorLayer1}
-	style:--color-layer2={$settings.colorLayer2 ?? $defaultSettings.colorLayer2}
+	style:--font-base={$settings.fontBase ?? $defaultKeySettings.fontBase}
+	style:--font-layer1={$settings.fontLayer1 ?? $defaultKeySettings.fontLayer1}
+	style:--font-layer2={$settings.fontLayer2 ?? $defaultKeySettings.fontLayer2}
+	style:--background={$settings.background ?? $defaultKeySettings.background}
+	style:--color-base={$settings.colorBase ?? $defaultKeySettings.colorBase}
+	style:--color-layer1={$settings.colorLayer1 ?? $defaultKeySettings.colorLayer1}
+	style:--color-layer2={$settings.colorLayer2 ?? $defaultKeySettings.colorLayer2}
 >
 	<div class="legend-base">{$settings.legendBase}</div>
 	<div class="legend-layer1">{$settings.legendLayer1}</div>
@@ -26,9 +26,7 @@
 
 <style lang="scss">
 	.key {
-		--background-dark: color-mix(in oklab, var(--background) 75%, black);
-		--background-as-image: linear-gradient(to bottom, var(--background), var(--background));
-		background: content-box var(--background-as-image), padding-box var(--background-dark);
+		background: var(--background);
 		border: none;
 		border-radius: var(--border-radius);
 		margin: 0;

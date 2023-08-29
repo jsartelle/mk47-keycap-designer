@@ -5,6 +5,15 @@
 	@include meta.load-css('pico');
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	--typography-spacing-vertical: 1.5rem;
+}
+
 input:not([type='checkbox'], [type='radio']),
 select,
 textarea {
@@ -18,21 +27,30 @@ input[type='color'] {
 
 label {
 	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: calc(var(--spacing) / 2);
 }
 
-label span {
+label > span {
 	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
+label > input {
+	margin: var(--spacing) 0;
+}
+
 label > :is(input:not([type]), input[type='text']) {
-	margin-top: var(--spacing);
 
 	+ span {
 		position: absolute;
 		top: var(--spacing);
-		left: calc(var(--form-element-spacing-horizontal) / 2);
-		padding: 0 calc(var(--form-element-spacing-horizontal) / 2);
+		left: calc(var(--spacing) / 2);
+		padding: 0 calc(var(--spacing) / 2);
 		background: var(--background-color);
 		cursor: text;
 		transform: translateY(-50%);

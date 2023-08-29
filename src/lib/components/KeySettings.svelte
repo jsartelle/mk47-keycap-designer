@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { defaultSettings, perKeySettings, type KeySettings } from '$lib/stores/store'
+	import { defaultKeySettings, perKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { Writable } from 'svelte/store'
 
 	export let keyIndex: number | null = null
 
 	const store = keyIndex
 		? perKeySettings.get(keyIndex!)!
-		: (defaultSettings as Writable<KeySettings>) // hack because you can't cast inside the markup, so without this $store.legendBase isn't type-safe even inside the #if block
+		: (defaultKeySettings as Writable<KeySettings>) // hack because you can't cast inside the markup, so without this $store.legendBase isn't type-safe even inside the #if block
 </script>
 
 <!-- FIXME get per-key settings to show the default settings if not set -->
 <!-- TODO add clear buttons for per-key settings -->
 
 <fieldset class="settings-row">
-	<legend>Entire Key</legend>
+	<legend>Base</legend>
 	{#if keyIndex !== null}
 		<label>
 			<input type="text" bind:value={$store.legendBase} />

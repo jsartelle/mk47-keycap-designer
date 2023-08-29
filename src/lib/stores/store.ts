@@ -77,7 +77,9 @@ const initialLegends: [string, string, string][] = [
 ]
 
 /* TODO persist all in localStorage */
-export const defaultSettings = writable<DefaultSettings>(initialKeySettings)
+export const keyboardBackground = writable('#000000')
+
+export const defaultKeySettings = writable(initialKeySettings)
 
 export const perKeySettings = new Map(
 	initialLegends.map((value, index) => [
