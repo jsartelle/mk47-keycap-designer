@@ -1,25 +1,27 @@
 <script lang="ts">
-	import { defaultSettings } from '$lib/stores/store'
+	import { defaultSettings, type KeySettings } from '$lib/stores/store'
+	import type { Writable } from 'svelte/store'
 
 	/** Unit width of the key (integer) */
 	export let width = 1
+	export let settings: Writable<KeySettings>
 </script>
 
 <div
 	class="key"
 	data-width={width}
 	style:--width={width}
-	style:--font-base={$defaultSettings.fontBase}
-	style:--font-layer1={$defaultSettings.fontLayer1}
-	style:--font-layer2={$defaultSettings.fontLayer2}
-	style:--background={$defaultSettings.background}
-	style:--color-base={$defaultSettings.colorBase}
-	style:--color-layer1={$defaultSettings.colorLayer1}
-	style:--color-layer2={$defaultSettings.colorLayer2}
+	style:--font-base={$settings.fontBase ?? $defaultSettings.fontBase}
+	style:--font-layer1={$settings.fontLayer1 ?? $defaultSettings.fontLayer1}
+	style:--font-layer2={$settings.fontLayer2 ?? $defaultSettings.fontLayer2}
+	style:--background={$settings.background ?? $defaultSettings.background}
+	style:--color-base={$settings.colorBase ?? $defaultSettings.colorBase}
+	style:--color-layer1={$settings.colorLayer1 ?? $defaultSettings.colorLayer1}
+	style:--color-layer2={$settings.colorLayer2 ?? $defaultSettings.colorLayer2}
 >
-	<slot><span /></slot>
-	<slot name="layer1"><span /></slot>
-	<slot name="layer2"><span /></slot>
+	<div class="legend-base">{$settings.legendBase}</div>
+	<div class="legend-layer1">{$settings.legendLayer1}</div>
+	<div class="legend-layer2">{$settings.legendLayer2}</div>
 </div>
 
 <style lang="scss">
@@ -40,7 +42,7 @@
 		aspect-ratio: 1 / 1;
 	}
 
-	:global(.key > *) {
+	.key > * {
 		white-space: nowrap;
 		user-select: none;
 		display: flex;
@@ -48,7 +50,7 @@
 		justify-content: flex-end;
 	}
 
-	:global(.key > :nth-child(1)) {
+	.legend-base {
 		grid-column-start: span 2;
 		color: var(--color-base);
 		font-family: var(--font-base), 'system-ui';
@@ -56,12 +58,12 @@
 		justify-content: flex-start;
 	}
 
-	:global(.key > :nth-child(2)) {
+	.legend-layer1 {
 		color: var(--color-layer1);
 		font-family: var(--font-layer1), 'system-ui';
 	}
 
-	:global(.key > :nth-child(3)) {
+	.legend-layer2 {
 		color: var(--color-layer2);
 		font-family: var(--font-layer2), 'system-ui';
 		text-align: right;

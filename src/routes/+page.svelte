@@ -8,7 +8,7 @@
 
 	<Keyboard />
 
-	<section class="settings">
+	<section>
 		<h1>Default Settings</h1>
 
 		<Settings />

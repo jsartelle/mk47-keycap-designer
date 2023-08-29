@@ -1,44 +1,81 @@
 <script lang="ts">
-	import { defaultSettings } from '$lib/stores/store'
+	import { defaultSettings, perKeySettings, type KeySettings } from '$lib/stores/store'
+	import type { Writable } from 'svelte/store'
 
 	export let keyIndex: number | null = null
-	const settings = defaultSettings // TODO use per-key overrides if keyIndex is set
+
+	const store = keyIndex
+		? perKeySettings.get(keyIndex!)!
+		: (defaultSettings as Writable<KeySettings>) // hack because you can't cast inside the markup, so without this $store.legendBase isn't type-safe even inside the #if block
 </script>
 
-<!-- TODO text alignment, casing, make smaller and able to be applied to per-key overrides with a popover -->
+<!-- FIXME get per-key settings to show the default settings if not set -->
+<!-- TODO add clear buttons for per-key settings -->
 
-<fieldset class="grid">
-	<legend>Fonts</legend>
+<fieldset class="settings-row">
+	<legend>Entire Key</legend>
+	{#if keyIndex !== null}
+		<label>
+			<input type="text" bind:value={$store.legendBase} />
+			<span>Base Legend</span>
+		</label>
+	{/if}
 	<label>
-		<input type="text" bind:value={$settings.fontBase} placeholder="system-ui" />
-		<span>Main</span>
+		<input type="text" bind:value={$store.fontBase} placeholder="system-ui" />
+		<span>Font</span>
 	</label>
 	<label>
-		<input type="text" bind:value={$settings.fontLayer1} placeholder="system-ui" />
-		<span>Layer 1</span>
-	</label>
-	<label>
-		<input type="text" bind:value={$settings.fontLayer2} placeholder="system-ui" />
-		<span>Layer 2</span>
-	</label>
-</fieldset>
-
-<fieldset class="grid">
-	<legend>Colors</legend>
-	<label>
-		<input type="color" bind:value={$settings.background} />
+		<input type="color" bind:value={$store.background} />
 		<span>Background</span>
 	</label>
 	<label>
-		<input type="color" bind:value={$settings.colorBase} />
-		<span>Base Text</span>
-	</label>
-	<label>
-		<input type="color" bind:value={$settings.colorLayer1} />
-		<span>Layer 1 Text</span>
-	</label>
-	<label>
-		<input type="color" bind:value={$settings.colorLayer2} />
-		<span>Layer 2 Text</span>
+		<input type="color" bind:value={$store.colorBase} />
+		<span>Color</span>
 	</label>
 </fieldset>
+
+<fieldset class="settings-row">
+	<legend>Layer 1</legend>
+
+	{#if keyIndex !== null}
+		<label>
+			<input type="text" bind:value={$store.legendLayer1} />
+			<span>Legend</span>
+		</label>
+	{/if}
+	<label>
+		<input type="text" bind:value={$store.fontLayer1} placeholder="system-ui" />
+		<span>Font</span>
+	</label>
+	<label>
+		<input type="color" bind:value={$store.colorLayer1} />
+		<span>Color</span>
+	</label>
+</fieldset>
+
+<fieldset class="settings-row">
+	<legend>Layer 2</legend>
+
+	{#if keyIndex !== null}
+		<label>
+			<input type="text" bind:value={$store.legendLayer2} />
+			<span>Legend</span>
+		</label>
+	{/if}
+	<label>
+		<input type="text" bind:value={$store.fontLayer2} placeholder="system-ui" />
+		<span>Font</span>
+	</label>
+	<label>
+		<input type="color" bind:value={$store.colorLayer2} />
+		<span>Color</span>
+	</label>
+</fieldset>
+
+<style lang="scss">
+	.settings-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing);
+	}
+</style>
