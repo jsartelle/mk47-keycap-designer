@@ -8,7 +8,7 @@
 
 	let keySettingsPopup: HTMLDialogElement
 	let keySettingsContainer: HTMLDivElement
-	let keySettingsIndex: number
+	let keySettingsIndex: number | null
 	let keyTop: string
 	let keyLeft: string
 	let keyWidth: string
@@ -38,12 +38,19 @@
 
 	function closeKeySettings() {
 		keySettingsPopup.close()
+		keySettingsIndex = null
 	}
 </script>
 
 <section class="keyboard" style:--background={$keyboardBackground}>
 	{#each perKeySettings as [index, key]}
-		<Key {index} settings={key} width={index === 41 ? 2 : 1} on:click={openKeySettings} />
+		<Key
+			{index}
+			settings={key}
+			width={index === 41 ? 2 : 1}
+			settingsOpen={index === keySettingsIndex}
+			on:click={openKeySettings}
+		/>
 	{/each}
 </section>
 

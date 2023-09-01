@@ -7,6 +7,7 @@
 	export let settings: Writable<KeySettings>
 	/** Unit width of the key (integer) */
 	export let width = 1
+	export let settingsOpen = false
 
 	let key: HTMLButtonElement
 
@@ -28,6 +29,7 @@
 	type="button"
 	on:click={dispatchClick}
 	data-width={width}
+	class:settings-open={settingsOpen}
 	style:--width={width}
 	style:--font-base={$settings.fontBase ?? $defaultKeySettings.fontBase}
 	style:--font-layer1={$settings.fontLayer1 ?? $defaultKeySettings.fontLayer1}
@@ -60,6 +62,11 @@
 
 	.key[data-width='1'] {
 		aspect-ratio: 1 / 1;
+	}
+
+	.key.settings-open {
+		box-shadow: 0 0 calc(var(--spacing) / 2) calc(var(--spacing) / 4)
+			var(--form-element-border-color);
 	}
 
 	.key > * {
