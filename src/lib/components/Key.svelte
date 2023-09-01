@@ -11,6 +11,10 @@
 
 	let key: HTMLButtonElement
 
+	let label: string | undefined
+	$: label =
+		$settings.legendBase || $settings.legendLayer1 || $settings.legendLayer2 ? undefined : 'Blank'
+
 	const dispatch = createEventDispatcher<{
 		click: {
 			index: number
@@ -28,6 +32,7 @@
 	class="key"
 	type="button"
 	on:click={dispatchClick}
+	aria-label={label}
 	data-width={width}
 	class:settings-open={settingsOpen}
 	style:--width={width}
