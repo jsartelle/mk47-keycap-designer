@@ -110,6 +110,7 @@
 		max-height: calc(100vh - var(--key-top) - var(--spacing));
 		border-radius: var(--border-radius);
 		overflow: hidden scroll;
+		overscroll-behavior: contain;
 		container-type: inline-size;
 	}
 
