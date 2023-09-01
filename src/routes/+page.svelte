@@ -10,13 +10,13 @@
 	<Keyboard />
 
 	<section>
-		<h1>Default Settings</h1>
+		<h1>Global Settings</h1>
 
-		<h2>Global</h2>
 		<fieldset>
+			<legend>Keyboard</legend>
 			<label>
 				<input type="color" bind:value={$keyboardBackground} />
-				<span>Keyboard Color</span>
+				<span>Background</span>
 			</label>
 		</fieldset>
 
