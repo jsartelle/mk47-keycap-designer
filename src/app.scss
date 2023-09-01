@@ -45,14 +45,33 @@ label > input {
 }
 
 label > :is(input:not([type]), input[type='text']) {
+	max-width: 100cqw;
 
 	+ span {
 		position: absolute;
 		top: var(--spacing);
-		left: calc(var(--spacing) / 2);
+		left: var(--form-element-spacing-horizontal);
 		padding: 0 calc(var(--spacing) / 2);
+		border-radius: var(--border-radius);
 		background: var(--background-color);
 		cursor: text;
 		transform: translateY(-50%);
+	}
+}
+
+@container (max-width: 300px) {
+	fieldset {
+		--spacing: 0.5rem;
+	}
+
+	fieldset legend {
+		margin-bottom: var(--spacing);
+	}
+
+	label > input:not([type='checkbox'], [type='radio'], [type='range']) {
+		height: calc(
+			0.5rem * var(--line-height) + var(--form-element-spacing-vertical) * 2 + var(--border-width) *
+				2
+		);
 	}
 }

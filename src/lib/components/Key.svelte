@@ -1,14 +1,32 @@
 <script lang="ts">
 	import { defaultKeySettings, type KeySettings } from '$lib/stores/store'
+	import { createEventDispatcher } from 'svelte'
 	import type { Writable } from 'svelte/store'
 
+	export let index = 0
+	export let settings: Writable<KeySettings>
 	/** Unit width of the key (integer) */
 	export let width = 1
-	export let settings: Writable<KeySettings>
+
+	let key: HTMLButtonElement
+
+	const dispatch = createEventDispatcher<{
+		click: {
+			index: number
+			rect: DOMRect
+		}
+	}>()
+
+	function dispatchClick() {
+		dispatch('click', { index, rect: key.getBoundingClientRect() })
+	}
 </script>
 
-<div
+<button
+	bind:this={key}
 	class="key"
+	type="button"
+	on:click={dispatchClick}
 	data-width={width}
 	style:--width={width}
 	style:--font-base={$settings.fontBase ?? $defaultKeySettings.fontBase}
@@ -22,10 +40,11 @@
 	<div class="legend-base">{$settings.legendBase}</div>
 	<div class="legend-layer1">{$settings.legendLayer1}</div>
 	<div class="legend-layer2">{$settings.legendLayer2}</div>
-</div>
+</button>
 
 <style lang="scss">
 	.key {
+		overflow: hidden;
 		background: var(--background);
 		border: none;
 		border-radius: var(--border-radius);
@@ -33,7 +52,10 @@
 		padding: 0.25rem;
 		grid-column-end: span var(--width, 1);
 		display: grid;
+		align-items: stretch;
 		grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
+		font-size: inherit; // FIXME set font size
+		text-align: inherit;
 	}
 
 	.key[data-width='1'] {

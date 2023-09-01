@@ -4,7 +4,8 @@
 
 	export let keyIndex: number | null = null
 
-	const store = keyIndex
+	let store: Writable<KeySettings>
+	$: store = keyIndex
 		? perKeySettings.get(keyIndex!)!
 		: (defaultKeySettings as Writable<KeySettings>) // hack because you can't cast inside the markup, so without this $store.legendBase isn't type-safe even inside the #if block
 </script>
