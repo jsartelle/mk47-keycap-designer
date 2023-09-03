@@ -9,7 +9,6 @@
 
 	let perKeyValue: Partial<GlobalSettings> | undefined
 	$: if (keyStore) {
-		console.log('Subscribe to keyStore', keyStore)
 		const unsubscribe = keyStore.subscribe((value) => (perKeyValue = value))
 		onDestroy(unsubscribe)
 	}

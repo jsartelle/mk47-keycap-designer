@@ -1,12 +1,10 @@
 <script lang="ts">
 	import KeySettingsColorInput from '$lib/components/KeySettingsColorInput.svelte'
-	import { globalKeySettings, perKeySettings, type KeySettings } from '$lib/stores/store'
+	import KeySettingsTextInput from '$lib/components/KeySettingsTextInput.svelte'
+	import { perKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { Writable } from 'svelte/store'
 
 	export let keyIndex: number | null = null
-
-	let store: Writable<any>
-	$: store = keyIndex ? perKeySettings.get(keyIndex!)! : globalKeySettings
 
 	let keyStore: Writable<KeySettings> | null
 	$: keyStore = keyIndex ? perKeySettings.get(keyIndex)! : null
@@ -17,20 +15,9 @@
 <fieldset class="settings-row">
 	<legend>Base</legend>
 	{#if $keyStore}
-		<label>
-			<input type="text" bind:value={$keyStore.legendBase} />
-			<span>Base Legend</span>
-		</label>
+		<KeySettingsTextInput option="legendBase" {keyStore} label="Legend" />
 	{/if}
-	<label class:modified={$keyStore?.fontBase}>
-		<input
-			type="text"
-			bind:value={$store.fontBase}
-			placeholder={$globalKeySettings.fontBase || 'system-ui'}
-		/>
-		<span>Font</span>
-	</label>
-	<KeySettingsColorInput option="background" {keyStore} label="Background" />
+	<KeySettingsTextInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
 	<KeySettingsColorInput option="colorBase" {keyStore} label="Color" />
 </fieldset>
 
@@ -38,19 +25,14 @@
 	<legend>Layer 1</legend>
 
 	{#if $keyStore}
-		<label>
-			<input type="text" bind:value={$keyStore.legendLayer1} />
-			<span>Legend</span>
-		</label>
+		<KeySettingsTextInput option="legendLayer1" {keyStore} label="Legend" />
 	{/if}
-	<label class:modified={$keyStore?.fontLayer1}>
-		<input
-			type="text"
-			bind:value={$store.fontLayer1}
-			placeholder={$globalKeySettings.fontLayer1 || 'system-ui'}
-		/>
-		<span>Font</span>
-	</label>
+	<KeySettingsTextInput
+		option="fontLayer1"
+		{keyStore}
+		label="Font"
+		fallbackPlaceholder="system-ui"
+	/>
 	<KeySettingsColorInput option="colorLayer1" {keyStore} label="Color" />
 </fieldset>
 
@@ -58,19 +40,14 @@
 	<legend>Layer 2</legend>
 
 	{#if $keyStore}
-		<label>
-			<input type="text" bind:value={$keyStore.legendLayer2} />
-			<span>Legend</span>
-		</label>
+		<KeySettingsTextInput option="legendLayer2" {keyStore} label="Legend" />
 	{/if}
-	<label class:modified={$keyStore?.fontLayer2}>
-		<input
-			type="text"
-			bind:value={$store.fontLayer2}
-			placeholder={$globalKeySettings.fontLayer2 || 'system-ui'}
-		/>
-		<span>Font</span>
-	</label>
+	<KeySettingsTextInput
+		option="fontLayer2"
+		{keyStore}
+		label="Font"
+		fallbackPlaceholder="system-ui"
+	/>
 	<KeySettingsColorInput option="colorLayer2" {keyStore} label="Color" />
 </fieldset>
 
