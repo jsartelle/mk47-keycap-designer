@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { defaultKeySettings, perKeySettings, type KeySettings } from '$lib/stores/store'
+	import { globalKeySettings, perKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { Writable } from 'svelte/store'
 
 	export let keyIndex: number | null = null
@@ -7,7 +7,7 @@
 	let store: Writable<KeySettings>
 	$: store = keyIndex
 		? perKeySettings.get(keyIndex!)!
-		: (defaultKeySettings as Writable<KeySettings>) // hack because you can't cast inside the markup, so without this $store.legendBase isn't type-safe even inside the #if block
+		: (globalKeySettings as Writable<KeySettings>) // hack because you can't cast inside the markup, so without this $store.legendBase isn't type-safe even inside the #if block
 </script>
 
 <!-- FIXME get per-key settings to show the default settings if not set -->
@@ -25,7 +25,7 @@
 		<input
 			type="text"
 			bind:value={$store.fontBase}
-			placeholder={$defaultKeySettings.fontBase || 'system-ui'}
+			placeholder={$globalKeySettings.fontBase || 'system-ui'}
 		/>
 		<span>Font</span>
 	</label>
@@ -52,7 +52,7 @@
 		<input
 			type="text"
 			bind:value={$store.fontLayer1}
-			placeholder={$defaultKeySettings.fontLayer1 || 'system-ui'}
+			placeholder={$globalKeySettings.fontLayer1 || 'system-ui'}
 		/>
 		<span>Font</span>
 	</label>
@@ -75,7 +75,7 @@
 		<input
 			type="text"
 			bind:value={$store.fontLayer2}
-			placeholder={$defaultKeySettings.fontLayer2 || 'system-ui'}
+			placeholder={$globalKeySettings.fontLayer2 || 'system-ui'}
 		/>
 		<span>Font</span>
 	</label>

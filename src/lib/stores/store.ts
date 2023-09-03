@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-export interface DefaultSettings {
+export interface GlobalSettings {
 	background: string
 	colorBase: string
 	fontBase: string
@@ -10,13 +10,13 @@ export interface DefaultSettings {
 	fontLayer2: string
 }
 
-export interface KeySettings extends Partial<DefaultSettings> {
+export interface KeySettings extends Partial<GlobalSettings> {
 	legendBase: string
 	legendLayer1: string
 	legendLayer2: string
 }
 
-const initialKeySettings: DefaultSettings = {
+const initialKeySettings: GlobalSettings = {
 	fontBase: '',
 	fontLayer1: '',
 	fontLayer2: '',
@@ -79,7 +79,7 @@ const initialLegends: [string, string, string][] = [
 /* TODO persist all in localStorage */
 export const keyboardBackground = writable('#000000')
 
-export const defaultKeySettings = writable(initialKeySettings)
+export const globalKeySettings = writable(initialKeySettings)
 
 export const perKeySettings = new Map(
 	initialLegends.map((value, index) => [

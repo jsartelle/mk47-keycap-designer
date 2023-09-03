@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { defaultKeySettings, type KeySettings } from '$lib/stores/store'
+	import { globalKeySettings, type KeySettings } from '$lib/stores/store'
 	import { createEventDispatcher } from 'svelte'
 	import type { Writable } from 'svelte/store'
 
@@ -36,13 +36,13 @@
 	data-width={width}
 	class:settings-open={settingsOpen}
 	style:--width={width}
-	style:--font-base={$settings.fontBase ?? $defaultKeySettings.fontBase}
-	style:--font-layer1={$settings.fontLayer1 ?? $defaultKeySettings.fontLayer1}
-	style:--font-layer2={$settings.fontLayer2 ?? $defaultKeySettings.fontLayer2}
-	style:--background={$settings.background ?? $defaultKeySettings.background}
-	style:--color-base={$settings.colorBase ?? $defaultKeySettings.colorBase}
-	style:--color-layer1={$settings.colorLayer1 ?? $defaultKeySettings.colorLayer1}
-	style:--color-layer2={$settings.colorLayer2 ?? $defaultKeySettings.colorLayer2}
+	style:--font-base={$settings.fontBase || $globalKeySettings.fontBase}
+	style:--font-layer1={$settings.fontLayer1 || $globalKeySettings.fontLayer1}
+	style:--font-layer2={$settings.fontLayer2 || $globalKeySettings.fontLayer2}
+	style:--background={$settings.background || $globalKeySettings.background}
+	style:--color-base={$settings.colorBase || $globalKeySettings.colorBase}
+	style:--color-layer1={$settings.colorLayer1 || $globalKeySettings.colorLayer1}
+	style:--color-layer2={$settings.colorLayer2 || $globalKeySettings.colorLayer2}
 >
 	<div class="legend-base">{$settings.legendBase}</div>
 	<div class="legend-layer1">{$settings.legendLayer1}</div>
