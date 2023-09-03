@@ -1,4 +1,21 @@
+import { browser } from '$app/environment'
 import { writable } from 'svelte/store'
+
+const writablePersistent = <T>(initialValue: T, storageKey: string) => {
+	const storageKeyPrefixed = `keycapDesigner_${storageKey}`
+	let storedValue
+	if (browser) storedValue = localStorage.getItem(storageKeyPrefixed)
+
+	const store = writable<T>(storedValue ? JSON.parse(storedValue) : initialValue)
+
+	const originalSet = store.set
+	store.set = (new_value) => {
+		localStorage.setItem(storageKeyPrefixed, JSON.stringify(new_value))
+		originalSet(new_value)
+	}
+
+	return store
+}
 
 export interface GlobalSettings {
 	background: string
@@ -76,18 +93,20 @@ const initialLegends: [string, string, string][] = [
 	['\\ |', '', ''],
 ]
 
-/* TODO persist all in localStorage */
-export const keyboardBackground = writable('#000000')
+export const keyboardBackground = writablePersistent('#000000', 'keyboardBackground')
 
-export const globalKeySettings = writable(initialKeySettings)
+export const globalKeySettings = writablePersistent(initialKeySettings, 'globalKeySettings')
 
 export const perKeySettings = new Map(
 	initialLegends.map((value, index) => [
 		index,
-		writable<KeySettings>({
-			legendBase: value[0],
-			legendLayer1: value[1],
-			legendLayer2: value[2],
-		}),
+		writablePersistent<KeySettings>(
+			{
+				legendBase: value[0],
+				legendLayer1: value[1],
+				legendLayer2: value[2],
+			},
+			`perKeySettings_${index}`,
+		),
 	]),
 )
