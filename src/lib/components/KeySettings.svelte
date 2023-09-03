@@ -22,7 +22,11 @@
 		</label>
 	{/if}
 	<label>
-		<input type="text" bind:value={$store.fontBase} placeholder="system-ui" />
+		<input
+			type="text"
+			bind:value={$store.fontBase}
+			placeholder={$defaultKeySettings.fontBase || 'system-ui'}
+		/>
 		<span>Font</span>
 	</label>
 	<label>
@@ -45,7 +49,11 @@
 		</label>
 	{/if}
 	<label>
-		<input type="text" bind:value={$store.fontLayer1} placeholder="system-ui" />
+		<input
+			type="text"
+			bind:value={$store.fontLayer1}
+			placeholder={$defaultKeySettings.fontLayer1 || 'system-ui'}
+		/>
 		<span>Font</span>
 	</label>
 	<label>
@@ -64,7 +72,11 @@
 		</label>
 	{/if}
 	<label>
-		<input type="text" bind:value={$store.fontLayer2} placeholder="system-ui" />
+		<input
+			type="text"
+			bind:value={$store.fontLayer2}
+			placeholder={$defaultKeySettings.fontLayer2 || 'system-ui'}
+		/>
 		<span>Font</span>
 	</label>
 	<label>

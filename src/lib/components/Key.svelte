@@ -85,19 +85,19 @@
 	.legend-base {
 		grid-column-start: span 2;
 		color: var(--color-base);
-		font-family: var(--font-base), 'system-ui';
+		font-family: var(--font-base);
 		font-size: 1.25em;
 		justify-content: flex-start;
 	}
 
 	.legend-layer1 {
 		color: var(--color-layer1);
-		font-family: var(--font-layer1), 'system-ui';
+		font-family: var(--font-layer1);
 	}
 
 	.legend-layer2 {
 		color: var(--color-layer2);
-		font-family: var(--font-layer2), 'system-ui';
+		font-family: var(--font-layer2);
 		text-align: right;
 	}
 </style>
