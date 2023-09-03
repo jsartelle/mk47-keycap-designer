@@ -12,9 +12,18 @@
 
 	let placeholder: string
 	$: placeholder = ($globalKeySettings as any)[option] || fallbackPlaceholder
+
+	let existsOnGlobal: boolean
+	$: existsOnGlobal = typeof ($globalKeySettings as any)[option] !== 'undefined'
 </script>
 
-<label class:modified={$keyStore?.[option]}>
+<label class:modified={existsOnGlobal && $keyStore?.[option]}>
 	<input type="text" bind:value={$store[option]} {placeholder} />
 	<span>{label}</span>
 </label>
+
+<style lang="scss">
+	.modified {
+		font-weight: bold;
+	}
+</style>

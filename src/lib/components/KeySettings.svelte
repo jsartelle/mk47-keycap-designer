@@ -57,7 +57,4 @@
 		flex-wrap: wrap;
 		gap: var(--spacing);
 	}
-	.modified {
-		font-weight: bold;
-	}
 </style>
