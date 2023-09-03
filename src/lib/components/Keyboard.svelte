@@ -125,7 +125,7 @@
 		);
 		background: var(--background-color);
 		border: var(--border-width) solid var(--form-element-border-color);
-		padding: var(--spacing);
+		padding: 0 var(--spacing);
 		width: var(--width);
 		max-height: calc(100vh - var(--key-top) - var(--spacing));
 		border-radius: var(--border-radius);
@@ -141,7 +141,7 @@
 		display: block;
 		position: sticky;
 		z-index: 1;
-		top: 0;
+		top: var(--spacing);
 		left: 0;
 		transform: translate(calc(var(--spacing) * -1), calc(var(--spacing) * -1));
 		height: var(--spacing);
@@ -159,7 +159,7 @@
 	.key-settings::after {
 		--gradient-position: center 100%;
 		top: auto;
-		bottom: 0;
+		bottom: var(--spacing);
 		transform: translate(calc(var(--spacing) * -1), var(--spacing));
 	}
 
