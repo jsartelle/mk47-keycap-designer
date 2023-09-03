@@ -38,7 +38,9 @@
 
 	function closeKeySettings() {
 		keySettingsPopup.close()
-		keySettingsIndex = null
+		keySettingsPopup.addEventListener('transitionend', () => (keySettingsIndex = null), {
+			once: true,
+		})
 	}
 </script>
 
@@ -82,8 +84,19 @@
 	}
 
 	dialog {
+		display: block;
 		background: none;
 		backdrop-filter: none;
+		opacity: 0;
+		transition: opacity 250ms ease;
+
+		&:not([open]) {
+			pointer-events: none;
+		}
+
+		&[open] {
+			opacity: 1;
+		}
 
 		&::backdrop {
 			background: none;
@@ -101,6 +114,7 @@
 		cursor: default;
 	}
 
+	/* FIXME move these to KeySettings component */
 	.key-settings {
 		--width: 300px;
 		position: fixed;
@@ -117,16 +131,17 @@
 		max-height: calc(100vh - var(--key-top) - var(--spacing));
 		border-radius: var(--border-radius);
 		overflow: hidden scroll;
-		overscroll-behavior: contain;
+		overscroll-behavior: none;
 		container-type: inline-size;
 	}
 
-	.key-settings.overflow-top::before,
-	.key-settings.overflow-bottom::after {
+	.key-settings::before,
+	.key-settings::after {
 		--gradient-position: center 0;
 		content: '';
 		display: block;
 		position: sticky;
+		z-index: 1;
 		top: 0;
 		left: 0;
 		transform: translate(calc(var(--spacing) * -1), calc(var(--spacing) * -1));
@@ -138,12 +153,19 @@
 			transparent
 		);
 		pointer-events: none;
+		opacity: 0;
+		transition: opacity 250ms ease;
 	}
 
-	.key-settings.overflow-bottom::after {
+	.key-settings::after {
 		--gradient-position: center 100%;
 		top: auto;
 		bottom: 0;
 		transform: translate(calc(var(--spacing) * -1), var(--spacing));
+	}
+
+	.key-settings.overflow-top::before,
+	.key-settings.overflow-bottom::after {
+		opacity: 1;
 	}
 </style>
