@@ -29,10 +29,10 @@
 	}
 
 	function keySettingsScroll() {
-		keySettingsOverflowTop = keySettingsPopup ? keySettingsContainer.scrollTop > 0 : false
+		keySettingsOverflowTop = keySettingsPopup ? keySettingsContainer.scrollTop > 10 : false
 		keySettingsOverflowBottom = keySettingsPopup
 			? keySettingsContainer.scrollTop + keySettingsContainer.clientHeight <
-			  keySettingsContainer.scrollHeight
+			  keySettingsContainer.scrollHeight - 10
 			: false
 	}
 
@@ -114,7 +114,6 @@
 		cursor: default;
 	}
 
-	/* FIXME move these to KeySettings component */
 	.key-settings {
 		--width: 300px;
 		position: fixed;
