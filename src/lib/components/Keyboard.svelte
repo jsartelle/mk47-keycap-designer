@@ -6,7 +6,7 @@
 
 	type KeyEvents = ComponentEvents<Key>
 
-	let keySettingsPopup: HTMLDialogElement
+	let keySettingsDialog: HTMLDialogElement
 	let keySettingsContainer: HTMLDivElement
 	let keySettingsIndex: number | null
 	let keyTop: string
@@ -22,23 +22,23 @@
 		keyLeft = event.detail.rect.left + 'px'
 		keyWidth = event.detail.rect.width + 'px'
 
-		keySettingsPopup.showModal()
+		keySettingsDialog.showModal()
 		await tick()
 		keySettingsContainer.scrollTo(0, 0)
 		keySettingsScroll()
 	}
 
 	function keySettingsScroll() {
-		keySettingsOverflowTop = keySettingsPopup ? keySettingsContainer.scrollTop > 10 : false
-		keySettingsOverflowBottom = keySettingsPopup
+		keySettingsOverflowTop = keySettingsDialog ? keySettingsContainer.scrollTop > 10 : false
+		keySettingsOverflowBottom = keySettingsDialog
 			? keySettingsContainer.scrollTop + keySettingsContainer.clientHeight <
 			  keySettingsContainer.scrollHeight - 10
 			: false
 	}
 
 	function closeKeySettings() {
-		keySettingsPopup.close()
-		keySettingsPopup.addEventListener('transitionend', () => (keySettingsIndex = null), {
+		keySettingsDialog.close()
+		keySettingsDialog.addEventListener('transitionend', () => (keySettingsIndex = null), {
 			once: true,
 		})
 	}
@@ -56,7 +56,7 @@
 	{/each}
 </section>
 
-<dialog bind:this={keySettingsPopup}>
+<dialog bind:this={keySettingsDialog}>
 	<button class="close-dialog" on:click={closeKeySettings} aria-label="Close Key Settings" />
 	<div
 		bind:this={keySettingsContainer}
