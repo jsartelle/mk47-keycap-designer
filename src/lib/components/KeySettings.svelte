@@ -1,27 +1,28 @@
 <script lang="ts">
+	import KeySettingsColorInput from '$lib/components/KeySettingsColorInput.svelte'
 	import { globalKeySettings, perKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { Writable } from 'svelte/store'
 
 	export let keyIndex: number | null = null
 
-	let store: Writable<KeySettings>
-	$: store = keyIndex
-		? perKeySettings.get(keyIndex!)!
-		: (globalKeySettings as Writable<KeySettings>) // hack because you can't cast inside the markup, so without this $store.legendBase isn't type-safe even inside the #if block
+	let store: Writable<any>
+	$: store = keyIndex ? perKeySettings.get(keyIndex!)! : globalKeySettings
+
+	let keyStore: Writable<KeySettings> | null
+	$: keyStore = keyIndex ? perKeySettings.get(keyIndex)! : null
 </script>
 
-<!-- FIXME get per-key settings to show the default settings if not set -->
 <!-- TODO add clear buttons for per-key settings -->
 
 <fieldset class="settings-row">
 	<legend>Base</legend>
-	{#if keyIndex !== null}
+	{#if $keyStore}
 		<label>
-			<input type="text" bind:value={$store.legendBase} />
+			<input type="text" bind:value={$keyStore.legendBase} />
 			<span>Base Legend</span>
 		</label>
 	{/if}
-	<label>
+	<label class:modified={$keyStore?.fontBase}>
 		<input
 			type="text"
 			bind:value={$store.fontBase}
@@ -29,26 +30,20 @@
 		/>
 		<span>Font</span>
 	</label>
-	<label>
-		<input type="color" bind:value={$store.background} />
-		<span>Background</span>
-	</label>
-	<label>
-		<input type="color" bind:value={$store.colorBase} />
-		<span>Color</span>
-	</label>
+	<KeySettingsColorInput option="background" {keyStore} label="Background" />
+	<KeySettingsColorInput option="colorBase" {keyStore} label="Color" />
 </fieldset>
 
 <fieldset class="settings-row">
 	<legend>Layer 1</legend>
 
-	{#if keyIndex !== null}
+	{#if $keyStore}
 		<label>
-			<input type="text" bind:value={$store.legendLayer1} />
+			<input type="text" bind:value={$keyStore.legendLayer1} />
 			<span>Legend</span>
 		</label>
 	{/if}
-	<label>
+	<label class:modified={$keyStore?.fontLayer1}>
 		<input
 			type="text"
 			bind:value={$store.fontLayer1}
@@ -56,22 +51,19 @@
 		/>
 		<span>Font</span>
 	</label>
-	<label>
-		<input type="color" bind:value={$store.colorLayer1} />
-		<span>Color</span>
-	</label>
+	<KeySettingsColorInput option="colorLayer1" {keyStore} label="Color" />
 </fieldset>
 
 <fieldset class="settings-row">
 	<legend>Layer 2</legend>
 
-	{#if keyIndex !== null}
+	{#if $keyStore}
 		<label>
-			<input type="text" bind:value={$store.legendLayer2} />
+			<input type="text" bind:value={$keyStore.legendLayer2} />
 			<span>Legend</span>
 		</label>
 	{/if}
-	<label>
+	<label class:modified={$keyStore?.fontLayer2}>
 		<input
 			type="text"
 			bind:value={$store.fontLayer2}
@@ -79,10 +71,7 @@
 		/>
 		<span>Font</span>
 	</label>
-	<label>
-		<input type="color" bind:value={$store.colorLayer2} />
-		<span>Color</span>
-	</label>
+	<KeySettingsColorInput option="colorLayer2" {keyStore} label="Color" />
 </fieldset>
 
 <style lang="scss">
@@ -90,5 +79,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--spacing);
+	}
+	.modified {
+		font-weight: bold;
 	}
 </style>
