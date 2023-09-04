@@ -13,6 +13,7 @@ const writablePersistent = <T>(initialValue: T, storageKey: string) => {
 		localStorage.setItem(storageKeyPrefixed, JSON.stringify(new_value))
 		originalSet(new_value)
 	}
+	store.update = (fn) => store.set(fn(initialValue))
 
 	return store
 }
