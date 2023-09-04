@@ -61,8 +61,8 @@
 		display: grid;
 		align-items: stretch;
 		grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
-		font-size: inherit; // FIXME set font size
 		text-align: inherit;
+		container-type: inline-size;
 	}
 
 	.key[data-width='1'] {
@@ -80,14 +80,16 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
+		font-size: 25cqw;
+		line-height: 1;
 	}
 
 	.legend-base {
 		grid-column-start: span 2;
 		color: var(--color-base);
 		font-family: var(--font-base);
-		font-size: 1.25em;
 		justify-content: flex-start;
+		font-size: 35cqw;
 	}
 
 	.legend-layer1 {
