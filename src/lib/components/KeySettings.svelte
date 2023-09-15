@@ -15,7 +15,7 @@
 		<KeySettingsTextInput option="legendBase" {keyStore} label="Legend" />
 	{/if}
 	<KeySettingsTextInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
-	<!-- FIXME forgot a field for key background lol -->
+	<KeySettingsColorInput option="background" {keyStore} label="Background" />
 	<KeySettingsColorInput option="colorBase" {keyStore} label="Color" />
 </fieldset>
 
