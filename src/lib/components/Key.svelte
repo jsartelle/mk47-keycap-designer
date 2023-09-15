@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { globalKeySettings, type KeySettings } from '$lib/stores/store'
+	import KeyLegend from '$lib/components/KeyLegend.svelte'
+	import { globalKeySettings, type KeySettings, type ResettablePersistent } from '$lib/stores/store'
 	import { createEventDispatcher } from 'svelte'
-	import type { Writable } from 'svelte/store'
 
 	export let index = 0
-	export let settings: Writable<KeySettings>
+	export let settings: ResettablePersistent<KeySettings>
 	/** Unit width of the key (integer) */
 	export let width = 1
 	export let settingsOpen = false
@@ -44,12 +44,19 @@
 	style:--color-layer1={$settings.colorLayer1 || $globalKeySettings.colorLayer1}
 	style:--color-layer2={$settings.colorLayer2 || $globalKeySettings.colorLayer2}
 >
-	<div class="legend-base">{$settings.legendBase}</div>
-	<div class="legend-layer1">{$settings.legendLayer1}</div>
-	<div class="legend-layer2">{$settings.legendLayer2}</div>
+	<div class="legend-base">
+		<KeyLegend name={$settings.legendBase} />
+	</div>
+	<div class="legend-layer1">
+		<KeyLegend name={$settings.legendLayer1} />
+	</div>
+	<div class="legend-layer2">
+		<KeyLegend name={$settings.legendLayer2} />
+	</div>
 </button>
 
 <style lang="scss">
+	// FIXME make padding relative to font size, fix space bar having double font size
 	.key {
 		overflow: hidden;
 		background: var(--background);
