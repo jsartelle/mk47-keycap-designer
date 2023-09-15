@@ -1,19 +1,27 @@
 import { browser } from '$app/environment'
-import { writable } from 'svelte/store'
+import { writable, type Writable } from 'svelte/store'
 
-const writablePersistent = <T>(initialValue: T, storageKey: string) => {
+export interface ResettablePersistent<T> extends Writable<T> {
+	reset(): void
+}
+
+const resettablePersistent = <T>(value: T, storageKey: string) => {
 	const storageKeyPrefixed = `keycapDesigner_${storageKey}`
 	let storedValue
 	if (browser) storedValue = localStorage.getItem(storageKeyPrefixed)
 
-	const store = writable<T>(storedValue ? JSON.parse(storedValue) : initialValue)
+	const store = writable<T>(
+		storedValue ? JSON.parse(storedValue) : value,
+	) as ResettablePersistent<T>
 
 	const originalSet = store.set
 	store.set = (new_value) => {
 		localStorage.setItem(storageKeyPrefixed, JSON.stringify(new_value))
 		originalSet(new_value)
 	}
-	store.update = (fn) => store.set(fn(initialValue))
+
+	// copy the value to avoid overwriting the reference and losing the initial value
+	store.reset = () => store.set(JSON.parse(JSON.stringify(value)))
 
 	return store
 }
@@ -94,14 +102,14 @@ const initialLegends: [string, string, string][] = [
 	['\\ |', '', ''],
 ]
 
-export const keyboardBackground = writablePersistent('#000000', 'keyboardBackground')
+export const keyboardBackground = resettablePersistent('#000000', 'keyboardBackground')
 
-export const globalKeySettings = writablePersistent(initialKeySettings, 'globalKeySettings')
+export const globalKeySettings = resettablePersistent(initialKeySettings, 'globalKeySettings')
 
 export const perKeySettings = new Map(
 	initialLegends.map((value, index) => [
 		index,
-		writablePersistent<KeySettings>(
+		resettablePersistent<KeySettings>(
 			{
 				legendBase: value[0],
 				legendLayer1: value[1],
