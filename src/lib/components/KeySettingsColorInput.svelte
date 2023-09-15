@@ -38,6 +38,7 @@
 </script>
 
 <label>
+	<!-- TODO allow dragging colors between inputs & keys -->
 	<input type="color" {value} on:input={(e) => updateValue(e.currentTarget.value)} />
 	<span>{label}</span>
 	{#if modified}
