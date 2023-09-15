@@ -1,11 +1,18 @@
 <script lang="ts">
-	import { globalKeySettings, type GlobalSettings } from '$lib/stores/store'
+	import ResetButton from '$lib/components/ResetButton.svelte'
+	import {
+		globalKeySettings,
+		type GlobalSettings,
+		type ResettablePersistent,
+	} from '$lib/stores/store'
 	import { onDestroy } from 'svelte'
-	import type { Writable } from 'svelte/store'
 
 	export let option: keyof GlobalSettings
-	export let keyStore: Writable<Partial<GlobalSettings>> | null
+	export let keyStore: ResettablePersistent<Partial<GlobalSettings>> | null
 	export let label: string
+
+	let store: ResettablePersistent<any>
+	$: store = keyStore ?? globalKeySettings
 
 	let perKeyValue: Partial<GlobalSettings> | undefined
 	$: if (keyStore) {
@@ -13,28 +20,27 @@
 		onDestroy(unsubscribe)
 	}
 
+	// we're not using two-way binding here because we want to fall back
+	// to the global color if the per-key color isn't set
 	let value: string
 	$: value = perKeyValue?.[option] || $globalKeySettings[option]
 
 	function updateValue(newValue: string) {
-		if (keyStore) {
-			keyStore.update((value) => {
-				value[option] = newValue
-				return value
-			})
-		} else {
-			$globalKeySettings[option] = newValue
-		}
+		$store[option] = newValue
+	}
+
+	let modified = false
+	$: modified = $store[option] && $store[option] !== store.initialValue[option]
+
+	function reset() {
+		$store[option] = store.initialValue[option]
 	}
 </script>
 
-<label class:modified={perKeyValue?.[option]}>
+<label>
 	<input type="color" {value} on:input={(e) => updateValue(e.currentTarget.value)} />
 	<span>{label}</span>
+	{#if modified}
+		<ResetButton on:click={reset} />
+	{/if}
 </label>
-
-<style lang="scss">
-	.modified {
-		font-weight: bold;
-	}
-</style>

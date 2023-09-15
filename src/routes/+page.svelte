@@ -1,7 +1,8 @@
 <script lang="ts">
-	import Keyboard from '$lib/components/Keyboard.svelte'
 	import KeySettings from '$lib/components/KeySettings.svelte'
-	import { keyboardBackground } from '$lib/stores/store'
+	import Keyboard from '$lib/components/Keyboard.svelte'
+	import ResetButton from '$lib/components/ResetButton.svelte'
+	import { caseColor } from '$lib/stores/store'
 </script>
 
 <main>
@@ -12,15 +13,20 @@
 	<section>
 		<h1>Global Settings</h1>
 
-		<fieldset>
+		<fieldset class="settings-row">
 			<legend>Keyboard</legend>
 			<label>
-				<input type="color" bind:value={$keyboardBackground} />
-				<span>Background</span>
+				<input type="color" bind:value={$caseColor} />
+				<span>Case Color</span>
+				{#if $caseColor !== caseColor.initialValue}
+					<ResetButton on:click={caseColor.reset} />
+				{/if}
 			</label>
 		</fieldset>
 
 		<h2>Keys</h2>
 		<KeySettings />
+
+		<!-- TODO add global reset buttons -->
 	</section>
 </main>

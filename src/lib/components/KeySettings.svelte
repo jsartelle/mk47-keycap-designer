@@ -1,16 +1,13 @@
 <script lang="ts">
 	import KeySettingsColorInput from '$lib/components/KeySettingsColorInput.svelte'
 	import KeySettingsTextInput from '$lib/components/KeySettingsTextInput.svelte'
-	import { perKeySettings, type KeySettings } from '$lib/stores/store'
-	import type { Writable } from 'svelte/store'
+	import { perKeySettings, type KeySettings, type ResettablePersistent } from '$lib/stores/store'
 
 	export let keyIndex: number | null = null
 
-	let keyStore: Writable<KeySettings> | null
+	let keyStore: ResettablePersistent<KeySettings> | null
 	$: keyStore = keyIndex ? perKeySettings.get(keyIndex)! : null
 </script>
-
-<!-- TODO add clear buttons for per-key settings -->
 
 <fieldset class="settings-row">
 	<legend>Base</legend>
@@ -50,11 +47,3 @@
 	/>
 	<KeySettingsColorInput option="colorLayer2" {keyStore} label="Color" />
 </fieldset>
-
-<style lang="scss">
-	.settings-row {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--spacing);
-	}
-</style>

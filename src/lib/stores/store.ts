@@ -2,6 +2,7 @@ import { browser } from '$app/environment'
 import { writable, type Writable } from 'svelte/store'
 
 export interface ResettablePersistent<T> extends Writable<T> {
+	initialValue: T
 	reset(): void
 }
 
@@ -19,8 +20,10 @@ const resettablePersistent = <T>(value: T, storageKey: string) => {
 		localStorage.setItem(storageKeyPrefixed, JSON.stringify(new_value))
 		originalSet(new_value)
 	}
+	
+	// copy the value to avoid overwriting the reference when the current value changes
+	store.initialValue = JSON.parse(JSON.stringify(value))
 
-	// copy the value to avoid overwriting the reference and losing the initial value
 	store.reset = () => store.set(JSON.parse(JSON.stringify(value)))
 
 	return store
@@ -42,14 +45,14 @@ export interface KeySettings extends Partial<GlobalSettings> {
 	legendLayer2: string
 }
 
-const initialKeySettings: GlobalSettings = {
-	fontBase: '',
-	fontLayer1: '',
-	fontLayer2: '',
+export const initialGlobalSettings: GlobalSettings = {
 	background: '#19181a',
 	colorBase: '#ccdfee',
+	fontBase: '',
 	colorLayer1: '#8d0eec',
+	fontLayer1: '',
 	colorLayer2: '#43a7fc',
+	fontLayer2: '',
 }
 
 const initialLegends: [string, string, string][] = [
@@ -102,9 +105,9 @@ const initialLegends: [string, string, string][] = [
 	['\\ |', '', ''],
 ]
 
-export const keyboardBackground = resettablePersistent('#000000', 'keyboardBackground')
+export const caseColor = resettablePersistent('#000000', 'caseColor')
 
-export const globalKeySettings = resettablePersistent(initialKeySettings, 'globalKeySettings')
+export const globalKeySettings = resettablePersistent(initialGlobalSettings, 'globalKeySettings')
 
 export const perKeySettings = new Map(
 	initialLegends.map((value, index) => [

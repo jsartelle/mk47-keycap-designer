@@ -5,6 +5,10 @@
 	@include meta.load-css('pico');
 }
 
+:root {
+	--spacing-small: calc(var(--spacing) / 2);
+}
+
 h1,
 h2,
 h3,
@@ -12,6 +16,11 @@ h4,
 h5,
 h6 {
 	--typography-spacing-vertical: 1.5rem;
+}
+
+button.inline {
+	display: inline;
+	width: auto;
 }
 
 input:not([type='checkbox'], [type='radio']),
@@ -30,13 +39,11 @@ label {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: calc(var(--spacing) / 2);
+	gap: var(--spacing-small);
 }
 
 label > span {
 	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 	user-select: none;
 }
 
@@ -51,7 +58,7 @@ label > :is(input:not([type]), input[type='text']) {
 		position: absolute;
 		top: var(--spacing);
 		left: var(--form-element-spacing-horizontal);
-		padding: 0 calc(var(--spacing) / 2);
+		padding: 0 var(--spacing-small);
 		border-radius: var(--border-radius);
 		background: var(--background-color);
 		cursor: text;
@@ -74,4 +81,10 @@ label > :is(input:not([type]), input[type='text']) {
 				2
 		);
 	}
+}
+
+fieldset.settings-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing);
 }
