@@ -25,6 +25,6 @@
 	<input type="text" bind:value={$store[option]} {placeholder} />
 	<span>{label}</span>
 	{#if modified}
-		<ResetButton on:click={reset} />
+		<ResetButton on:click={reset} label={`Reset ${label}`} />
 	{/if}
 </label>

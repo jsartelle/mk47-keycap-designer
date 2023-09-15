@@ -41,6 +41,6 @@
 	<input type="color" {value} on:input={(e) => updateValue(e.currentTarget.value)} />
 	<span>{label}</span>
 	{#if modified}
-		<ResetButton on:click={reset} />
+		<ResetButton on:click={reset} label={`Reset ${label}`} />
 	{/if}
 </label>
