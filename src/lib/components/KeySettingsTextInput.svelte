@@ -22,9 +22,11 @@
 </script>
 
 <label>
+	<!-- TODO popup icon picker -->
 	<input type="text" bind:value={$store[option]} {placeholder} />
 	<span>{label}</span>
 	{#if modified}
+		<!-- FIXME put on same line as text field -->
 		<ResetButton on:click={reset} label={`Reset ${label}`} />
 	{/if}
 </label>
