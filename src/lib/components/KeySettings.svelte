@@ -9,16 +9,17 @@
 	$: keyStore = keyIndex ? perKeySettings.get(keyIndex)! : null
 </script>
 
-<fieldset class="settings-row">
+<fieldset>
 	<legend>Base</legend>
 	{#if $keyStore}
 		<KeySettingsTextInput option="legendBase" {keyStore} label="Legend" />
 	{/if}
 	<KeySettingsTextInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
+	<!-- FIXME forgot a field for key background lol -->
 	<KeySettingsColorInput option="colorBase" {keyStore} label="Color" />
 </fieldset>
 
-<fieldset class="settings-row">
+<fieldset>
 	<legend>Layer 1</legend>
 
 	{#if $keyStore}
@@ -33,7 +34,7 @@
 	<KeySettingsColorInput option="colorLayer1" {keyStore} label="Color" />
 </fieldset>
 
-<fieldset class="settings-row">
+<fieldset>
 	<legend>Layer 2</legend>
 
 	{#if $keyStore}

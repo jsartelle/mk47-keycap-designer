@@ -20,10 +20,11 @@ const resettablePersistent = <T>(value: T, storageKey: string) => {
 		localStorage.setItem(storageKeyPrefixed, JSON.stringify(new_value))
 		originalSet(new_value)
 	}
-	
+
+	store.update = (fn) => store.set(fn(value))
+
 	// copy the value to avoid overwriting the reference when the current value changes
 	store.initialValue = JSON.parse(JSON.stringify(value))
-
 	store.reset = () => store.set(JSON.parse(JSON.stringify(value)))
 
 	return store
@@ -45,7 +46,7 @@ export interface KeySettings extends Partial<GlobalSettings> {
 	legendLayer2: string
 }
 
-export const initialGlobalSettings: GlobalSettings = {
+const initialGlobalSettings: GlobalSettings = {
 	background: '#19181a',
 	colorBase: '#ccdfee',
 	fontBase: '',

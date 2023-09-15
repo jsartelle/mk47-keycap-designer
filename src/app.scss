@@ -18,6 +18,13 @@ h6 {
 	--typography-spacing-vertical: 1.5rem;
 }
 
+fieldset {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing);
+}
+
+
 button.inline {
 	display: inline;
 	width: auto;
@@ -83,8 +90,3 @@ label > :is(input:not([type]), input[type='text']) {
 	}
 }
 
-fieldset.settings-row {
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--spacing);
-}
