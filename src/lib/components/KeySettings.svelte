@@ -6,7 +6,7 @@
 	export let keyIndex: number | null = null
 
 	let keyStore: ResettablePersistent<KeySettings> | null
-	$: keyStore = keyIndex ? perKeySettings.get(keyIndex)! : null
+	$: keyStore = keyIndex !== null ? perKeySettings.get(keyIndex)! : null
 </script>
 
 <fieldset>
