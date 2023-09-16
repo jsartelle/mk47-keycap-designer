@@ -1,5 +1,9 @@
 /* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
 @use 'sass:meta';
+@use '@picocss/pico/scss/pico' with (
+	$semantic-root-element: '#root',
+	$enable-semantic-container: true
+);
 
 @layer pico {
 	@include meta.load-css('pico');
@@ -31,6 +35,11 @@ fieldset > button {
 button.inline {
 	display: inline;
 	width: auto;
+
+	@media (max-width: map-get(pico.$breakpoints, 'sm')) {
+		display: block;
+		width: 100%;
+	}
 }
 
 input:not([type='checkbox'], [type='radio']),
