@@ -24,7 +24,6 @@ fieldset {
 	gap: var(--spacing);
 }
 
-
 button.inline {
 	display: inline;
 	width: auto;
@@ -61,15 +60,17 @@ label > input {
 label > :is(input:not([type]), input[type='text']) {
 	max-width: 100cqw;
 
-	+ span {
+	+ .field-title {
 		position: absolute;
 		top: var(--spacing);
 		left: var(--form-element-spacing-horizontal);
+		display: flex;
 		padding: 0 var(--spacing-small);
 		border-radius: var(--border-radius);
 		background: var(--background-color);
 		cursor: text;
 		transform: translateY(-50%);
+		gap: var(--spacing-small);
 	}
 }
 
@@ -89,4 +90,3 @@ label > :is(input:not([type]), input[type='text']) {
 		);
 	}
 }
-

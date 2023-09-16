@@ -25,6 +25,7 @@
 	{#if $keyStore}
 		<KeySettingsTextInput option="legendLayer1" {keyStore} label="Legend" />
 	{/if}
+	<!-- FIXME gray out if Lucide icon is being used -->
 	<KeySettingsTextInput
 		option="fontLayer1"
 		{keyStore}

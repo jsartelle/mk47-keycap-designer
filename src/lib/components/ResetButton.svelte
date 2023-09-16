@@ -11,7 +11,9 @@
 <style lang="scss">
 	button {
 		border: none;
-		padding-inline: 0;
+		height: 100%;
+		padding: 0;
 		margin: 0;
+		translate: 0 -2px;
 	}
 </style>
