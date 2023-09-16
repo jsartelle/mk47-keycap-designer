@@ -9,8 +9,8 @@
 	$: keyStore = keyIndex !== null ? perKeySettings.get(keyIndex)! : null
 </script>
 
+<h3>Base</h3>
 <fieldset>
-	<legend>Base</legend>
 	{#if $keyStore}
 		<KeySettingsTextInput option="legendBase" {keyStore} label="Legend" />
 	{/if}
@@ -20,9 +20,8 @@
 	<KeySettingsColorInput option="colorBase" {keyStore} label="Color" />
 </fieldset>
 
+<h3>Layer 1</h3>
 <fieldset>
-	<legend>Layer 1</legend>
-
 	{#if $keyStore}
 		<KeySettingsTextInput option="legendLayer1" {keyStore} label="Legend" />
 	{/if}
@@ -35,9 +34,8 @@
 	<KeySettingsColorInput option="colorLayer1" {keyStore} label="Color" />
 </fieldset>
 
+<h3>Layer 2</h3>
 <fieldset>
-	<legend>Layer 2</legend>
-
 	{#if $keyStore}
 		<KeySettingsTextInput option="legendLayer2" {keyStore} label="Legend" />
 	{/if}

@@ -50,7 +50,6 @@
 		<h1>Global Settings</h1>
 
 		<fieldset>
-			<legend>Keyboard</legend>
 			<label>
 				<input type="color" bind:value={$caseColor} />
 				<span>Case Color</span>
