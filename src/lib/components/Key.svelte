@@ -78,7 +78,7 @@
 		border: none;
 		border-radius: var(--border-radius);
 		margin: 0;
-		padding: 10%;
+		padding: calc(10% / var(--width, 1));
 		grid-column-end: span var(--width, 1);
 		display: grid;
 		align-items: stretch;
