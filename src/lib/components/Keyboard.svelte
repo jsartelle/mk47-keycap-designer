@@ -124,6 +124,7 @@
 			100vw - var(--width) - var(--spacing)
 		);
 		background: var(--background-color);
+		box-shadow: 0 0 calc(var(--spacing) / 2) var(--form-element-border-color);
 		border: var(--border-width) solid var(--form-element-border-color);
 		padding: 0 var(--spacing);
 		width: var(--width);

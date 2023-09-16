@@ -40,7 +40,11 @@ textarea {
 }
 
 input[type='color'] {
+	overflow: hidden;
 	padding: 0;
+	// follows the border radius better
+	outline: var(--border-width) solid var(--form-element-border-color);
+	border: none;
 	aspect-ratio: 1 / 1;
 }
 
