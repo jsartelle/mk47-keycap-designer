@@ -2,9 +2,12 @@
 	import Key from '$lib/components/Key.svelte'
 	import KeySettings from '$lib/components/KeySettings.svelte'
 	import { caseColor, perKeySettings } from '$lib/stores/store'
-	import { tick, type ComponentEvents } from 'svelte'
+	import { onMount, tick, type ComponentEvents } from 'svelte'
 
 	type KeyEvents = ComponentEvents<Key>
+
+	let loading = true
+	onMount(() => (loading = false))
 
 	let keySettingsDialog: HTMLDialogElement
 	let keySettingsContainer: HTMLDivElement
@@ -12,7 +15,6 @@
 	let keyTop: string
 	let keyLeft: string
 	let keyWidth: string
-
 	let keySettingsOverflowTop: boolean
 	let keySettingsOverflowBottom: boolean
 
@@ -44,7 +46,7 @@
 	}
 </script>
 
-<section class="keyboard" style:--background={$caseColor}>
+<section class="keyboard" class:loading style:--background={$caseColor}>
 	{#each perKeySettings as [index, key]}
 		<Key
 			{index}
@@ -81,6 +83,12 @@
 		grid-template: repeat(4, minmax(0, 1fr)) / repeat(12, minmax(0, 1fr));
 		gap: var(--spacing-small);
 		font-size: 75%;
+		transition: var(--transition);
+		transition-property: background, filter;
+	}
+
+	.keyboard.loading {
+		filter: blur(0.5rem);
 	}
 
 	dialog {
@@ -88,7 +96,7 @@
 		background: none;
 		backdrop-filter: none;
 		opacity: 0;
-		transition: opacity 250ms ease;
+		transition: opacity var(--transition);
 
 		&:not([open]) {
 			pointer-events: none;
@@ -154,7 +162,7 @@
 		);
 		pointer-events: none;
 		opacity: 0;
-		transition: opacity 250ms ease;
+		transition: opacity var(--transition);
 	}
 
 	.key-settings::after {
