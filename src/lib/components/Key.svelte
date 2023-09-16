@@ -1,7 +1,7 @@
 <script lang="ts">
 	import KeyLegend from '$lib/components/KeyLegend.svelte'
 	import { globalKeySettings, type KeySettings, type ResettablePersistent } from '$lib/stores/store'
-	import { createEventDispatcher } from 'svelte'
+	import { createEventDispatcher, onMount } from 'svelte'
 
 	export let index = 0
 	export let settings: ResettablePersistent<KeySettings>
@@ -10,10 +10,24 @@
 	export let settingsOpen = false
 
 	let key: HTMLButtonElement
+	let legendBase: HTMLDivElement
+	let legendLayer1: HTMLDivElement
+	let legendLayer2: HTMLDivElement
 
 	let label: string | undefined
 	$: label =
 		$settings.legendBase || $settings.legendLayer1 || $settings.legendLayer2 ? undefined : 'Blank'
+
+	let iconSizeBase: number
+	let iconSizeLayer1: number
+	let iconSizeLayer2: number
+
+	function measureIconSizes() {
+		iconSizeBase = parseInt(getComputedStyle(legendBase).fontSize)
+		iconSizeLayer1 = parseInt(getComputedStyle(legendLayer1).fontSize)
+		iconSizeLayer2 = parseInt(getComputedStyle(legendLayer2).fontSize)
+	}
+	onMount(measureIconSizes)
 
 	const dispatch = createEventDispatcher<{
 		click: {
@@ -26,6 +40,8 @@
 		dispatch('click', { index, rect: key.getBoundingClientRect() })
 	}
 </script>
+
+<svelte:window on:resize={measureIconSizes} />
 
 <button
 	bind:this={key}
@@ -44,32 +60,31 @@
 	style:--color-layer1={$settings.colorLayer1 || $globalKeySettings.colorLayer1}
 	style:--color-layer2={$settings.colorLayer2 || $globalKeySettings.colorLayer2}
 >
-	<div class="legend-base">
-		<KeyLegend name={$settings.legendBase} />
+	<div class="legend-base" bind:this={legendBase}>
+		<KeyLegend name={$settings.legendBase} size={iconSizeBase} />
 	</div>
-	<div class="legend-layer1">
-		<KeyLegend name={$settings.legendLayer1} />
+	<div class="legend-layer1" bind:this={legendLayer1}>
+		<KeyLegend name={$settings.legendLayer1} size={iconSizeLayer1} />
 	</div>
-	<div class="legend-layer2">
-		<KeyLegend name={$settings.legendLayer2} />
+	<div class="legend-layer2" bind:this={legendLayer2}>
+		<KeyLegend name={$settings.legendLayer2} size={iconSizeLayer2} />
 	</div>
 </button>
 
 <style lang="scss">
-	// FIXME make padding relative to font size, fix space bar having double font size
 	.key {
 		overflow: hidden;
 		background: var(--background);
 		border: none;
 		border-radius: var(--border-radius);
 		margin: 0;
-		padding: 0.25rem;
+		padding: 10%;
 		grid-column-end: span var(--width, 1);
 		display: grid;
 		align-items: stretch;
 		grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
 		text-align: inherit;
-		container-type: inline-size;
+		container-type: size;
 	}
 
 	.key[data-width='1'] {
@@ -87,7 +102,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		font-size: 25cqw;
+		font-size: 30cqh;
 		line-height: 1;
 	}
 
@@ -96,7 +111,7 @@
 		color: var(--color-base);
 		font-family: var(--font-base);
 		justify-content: flex-start;
-		font-size: 35cqw;
+		font-size: 50cqh;
 	}
 
 	.legend-layer1 {

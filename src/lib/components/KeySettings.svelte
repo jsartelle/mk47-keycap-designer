@@ -14,6 +14,7 @@
 	{#if $keyStore}
 		<KeySettingsTextInput option="legendBase" {keyStore} label="Legend" />
 	{/if}
+	<!-- TODO disable if Lucide icon is being used -->
 	<KeySettingsTextInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
 	<KeySettingsColorInput option="background" {keyStore} label="Background" />
 	<KeySettingsColorInput option="colorBase" {keyStore} label="Color" />
@@ -25,7 +26,6 @@
 	{#if $keyStore}
 		<KeySettingsTextInput option="legendLayer1" {keyStore} label="Legend" />
 	{/if}
-	<!-- FIXME gray out if Lucide icon is being used -->
 	<KeySettingsTextInput
 		option="fontLayer1"
 		{keyStore}

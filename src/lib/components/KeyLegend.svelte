@@ -1,11 +1,11 @@
 <script lang="ts">
 	import * as icons from 'lucide-svelte'
 	export let name: string
+	export let size: number
 </script>
 
 {#if name.startsWith('lucide:')}
-	<!-- FIXME need to fix font size on icons -->
-	<svelte:component this={icons[name.replace('lucide:', '')]} {...$$props} />
+	<svelte:component this={icons[name.replace('lucide:', '')]} {size} {...$$props} />
 {:else}
 	{name}
 {/if}
