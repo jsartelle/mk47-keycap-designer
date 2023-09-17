@@ -7,6 +7,32 @@
 
 	let keyStore: ResettablePersistent<KeySettings> | null
 	$: keyStore = keyIndex !== null ? perKeySettings.get(keyIndex)! : null
+
+	function resetColorsFonts() {
+		if (!keyStore) return
+		keyStore.update((value) => {
+			const initialValue = keyStore!.getInitialValue()
+			value.background = initialValue.background
+			value.colorBase = initialValue.colorBase
+			value.colorLayer1 = initialValue.colorLayer1
+			value.colorLayer2 = initialValue.colorLayer2
+			value.fontBase = initialValue.fontBase
+			value.fontLayer1 = initialValue.fontLayer1
+			value.fontLayer2 = initialValue.fontLayer2
+			return value
+		})
+	}
+
+	function resetLegends() {
+		if (!keyStore) return
+		keyStore.update((value) => {
+			const initialValue = keyStore!.getInitialValue()
+			value.legendBase = initialValue.legendBase
+			value.legendLayer1 = initialValue.legendLayer1
+			value.legendLayer2 = initialValue.legendLayer2
+			return value
+		})
+	}
 </script>
 
 <h3>Base</h3>
@@ -47,3 +73,11 @@
 	/>
 	<KeySettingsColorInput option="colorLayer2" {keyStore} label="Color" />
 </fieldset>
+
+{#if $keyStore}
+	<h3>Reset</h3>
+	<fieldset>
+		<button class="inline contrast" on:click={resetColorsFonts}>Reset Colors & Fonts</button>
+		<button class="inline contrast" on:click={resetLegends}>Reset Legends</button>
+	</fieldset>
+{/if}
