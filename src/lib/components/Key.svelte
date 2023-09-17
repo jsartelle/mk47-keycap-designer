@@ -85,7 +85,7 @@
 		grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
 		text-align: inherit;
 		container-type: size;
-		transition: background var(--transition);
+		transition: none;
 	}
 
 	.key[data-width='1'] {
@@ -105,7 +105,6 @@
 		justify-content: flex-end;
 		font-size: 30cqh;
 		line-height: 1;
-		transition: color var(--transition);
 	}
 
 	.legend-base {

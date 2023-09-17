@@ -83,8 +83,7 @@
 		grid-template: repeat(4, minmax(0, 1fr)) / repeat(12, minmax(0, 1fr));
 		gap: var(--spacing-small);
 		font-size: 75%;
-		transition: var(--transition);
-		transition-property: background, filter;
+		transition: filter var(--transition);
 	}
 
 	.keyboard.loading {

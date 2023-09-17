@@ -60,6 +60,7 @@ const initialGlobalSettings: GlobalSettings = {
 	fontLayer2: '',
 }
 
+// TODO match factory settings
 const initialLegends: [string, string, string][] = [
 	['Esc', '', ''],
 	['Q', 'F1', 'F11'],
