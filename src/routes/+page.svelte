@@ -16,6 +16,7 @@
 			perKeySettings.forEach((store) =>
 				store.update((value) => {
 					const initialValue = store.getInitialValue()
+					value.background = initialValue.background
 					value.colorBase = initialValue.colorBase
 					value.colorLayer1 = initialValue.colorLayer1
 					value.colorLayer2 = initialValue.colorLayer2
