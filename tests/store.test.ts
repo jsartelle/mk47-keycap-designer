@@ -39,7 +39,7 @@ describe('ResettablePersistent', () => {
 		expect(get(store)).toEqual(inputValue)
 	})
 
-	it('should provide current value to update and call set with result', () => {
+	it('should provide current value to update, and save result to store and localStorage', () => {
 		const store = resettablePersistent(inputValue, storageKey)
 		store.update((value) => {
 			expect(value).toEqual(inputValue)
@@ -49,10 +49,6 @@ describe('ResettablePersistent', () => {
 			return value
 		})
 
-		expect(get(store)).toEqual({
-			number: 123,
-			fruit: 'banana',
-		})
 		expect(localStorage.setItem).toHaveBeenLastCalledWith(
 			expect.stringContaining(storageKey),
 			JSON.stringify({
@@ -60,6 +56,10 @@ describe('ResettablePersistent', () => {
 				fruit: 'banana',
 			}),
 		)
+		expect(get(store)).toEqual({
+			number: 123,
+			fruit: 'banana',
+		})
 	})
 
 	it('should return copy of initial value from getInitialValue', () => {
@@ -79,6 +79,7 @@ describe('ResettablePersistent', () => {
 		store.reset()
 
 		expect(get(store)).toEqual(inputValue)
+		expect(get(store)).not.toBe(inputValue)
 		expect(localStorage.setItem).toHaveBeenLastCalledWith(
 			expect.stringContaining(storageKey),
 			JSON.stringify(inputValue),
