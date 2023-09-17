@@ -55,7 +55,7 @@
 			<label>
 				<input type="color" bind:value={$caseColor} />
 				<span>Case Color</span>
-				{#if $caseColor !== caseColor.initialValue}
+				{#if $caseColor !== caseColor.getInitialValue()}
 					<ResetButton on:click={caseColor.reset} label="Reset Case Color" />
 				{/if}
 			</label>
