@@ -15,12 +15,13 @@
 		if (confirm('Reset all key colors and fonts?')) {
 			perKeySettings.forEach((store) =>
 				store.update((value) => {
-					value.colorBase = store.initialValue.colorBase
-					value.colorLayer1 = store.initialValue.colorLayer1
-					value.colorLayer2 = store.initialValue.colorLayer2
-					value.fontBase = store.initialValue.fontBase
-					value.fontLayer1 = store.initialValue.fontLayer1
-					value.fontLayer2 = store.initialValue.fontLayer2
+					const initialValue = store.getInitialValue()
+					value.colorBase = initialValue.colorBase
+					value.colorLayer1 = initialValue.colorLayer1
+					value.colorLayer2 = initialValue.colorLayer2
+					value.fontBase = initialValue.fontBase
+					value.fontLayer1 = initialValue.fontLayer1
+					value.fontLayer2 = initialValue.fontLayer2
 					return value
 				}),
 			)
@@ -31,9 +32,10 @@
 		if (confirm('Reset all key legends?')) {
 			perKeySettings.forEach((store) =>
 				store.update((value) => {
-					value.legendBase = store.initialValue.legendBase
-					value.legendLayer1 = store.initialValue.legendLayer1
-					value.legendLayer2 = store.initialValue.legendLayer2
+					const initialValue = store.getInitialValue()
+					value.legendBase = initialValue.legendBase
+					value.legendLayer1 = initialValue.legendLayer1
+					value.legendLayer2 = initialValue.legendLayer2
 					return value
 				}),
 			)

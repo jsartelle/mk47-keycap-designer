@@ -2,17 +2,18 @@ import { browser } from '$app/environment'
 import { writable, type Writable } from 'svelte/store'
 
 export interface ResettablePersistent<T> extends Writable<T> {
-	initialValue: T
-	reset(): void
+	/** Returns a copy of the initial value, to avoid overwriting references */
+	getInitialValue: () => T
+	reset: () => void
 }
 
-const resettablePersistent = <T>(value: T, storageKey: string) => {
+const resettablePersistent = <T>(initialValue: T, storageKey: string) => {
 	const storageKeyPrefixed = `keycapDesigner_${storageKey}`
 	let storedValue
 	if (browser) storedValue = localStorage.getItem(storageKeyPrefixed)
 
 	const store = writable<T>(
-		storedValue ? JSON.parse(storedValue) : value,
+		storedValue ? JSON.parse(storedValue) : initialValue,
 	) as ResettablePersistent<T>
 
 	const originalSet = store.set
@@ -21,11 +22,8 @@ const resettablePersistent = <T>(value: T, storageKey: string) => {
 		originalSet(new_value)
 	}
 
-	store.update = (fn) => store.set(fn(value))
-
-	// copy the value to avoid overwriting the reference when the current value changes
-	store.initialValue = JSON.parse(JSON.stringify(value))
-	store.reset = () => store.set(JSON.parse(JSON.stringify(value)))
+	store.getInitialValue = () => JSON.parse(JSON.stringify(initialValue))
+	store.reset = () => store.set(store.getInitialValue())
 
 	return store
 }

@@ -30,10 +30,10 @@
 	}
 
 	let modified = false
-	$: modified = $store[option] && $store[option] !== store.initialValue[option]
+	$: modified = $store[option] && $store[option] !== store.getInitialValue()[option]
 
 	function reset() {
-		$store[option] = store.initialValue[option]
+		$store[option] = store.getInitialValue()[option]
 	}
 </script>
 
