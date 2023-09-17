@@ -11,6 +11,7 @@
 
 :root {
 	--spacing-small: calc(var(--spacing) / 2);
+	container-type: inline-size;
 }
 
 h1,
@@ -33,13 +34,12 @@ fieldset > button {
 }
 
 button.inline {
-	display: inline;
-	width: auto;
-
-	@media (max-width: map-get(pico.$breakpoints, 'sm')) {
+	@container (max-width: #{map-get(pico.$breakpoints, 'sm')}) {
 		display: block;
 		width: 100%;
 	}
+	display: inline;
+	width: auto;
 }
 
 input:not([type='checkbox'], [type='radio']),
