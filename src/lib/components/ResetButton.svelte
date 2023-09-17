@@ -4,7 +4,7 @@
 	export let label: string
 </script>
 
-<button class="inline outline secondary" on:click aria-label={label} title={label}>
+<button class="inline noexpand outline secondary" on:click aria-label={label} title={label}>
 	<RotateCcw />
 </button>
 

@@ -34,9 +34,12 @@ fieldset > button {
 }
 
 button.inline {
+	// become full width again in small containers
 	@container (max-width: #{map-get(pico.$breakpoints, 'sm')}) {
-		display: block;
-		width: 100%;
+		&:not(.noexpand) {
+			display: block;
+			width: 100%;
+		}
 	}
 	display: inline;
 	width: auto;
