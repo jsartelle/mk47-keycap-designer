@@ -65,8 +65,10 @@
 		<h2>Reset</h2>
 		<fieldset>
 			<button class="inline" on:click={resetGlobalSettings}>Reset Global Settings</button>
-			<button class="inline" on:click={resetKeyColorsFonts}>Reset Key Colors & Fonts</button>
-			<button class="inline" on:click={resetKeyLegends}>Reset Key Legends</button>
+			<button class="inline" on:click={resetKeyColorsFonts}>Reset All Key Colors & Fonts</button>
+			<button class="inline" on:click={resetKeyLegends}>Reset All Key Legends</button>
 		</fieldset>
+
+		<!-- TODO import/export options -->
 	</section>
 </main>
