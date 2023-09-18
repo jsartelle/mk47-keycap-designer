@@ -148,7 +148,7 @@
 	</section>
 </main>
 
-<div class="hidden">
+<div aria-hidden="true">
 	<!-- svelte-ignore a11y-missing-attribute -->
 	<a bind:this={downloadLink} download="mk47-keycaps.json">Download</a>
 	<input bind:this={fileInput} type="file" accept="application/json" bind:files />
@@ -159,7 +159,7 @@
 		margin-left: var(--spacing-small);
 	}
 
-	.hidden {
+	[aria-hidden="true"] {
 		display: none;
 	}
 </style>
