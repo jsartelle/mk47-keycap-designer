@@ -29,8 +29,10 @@ fieldset {
 	gap: var(--spacing);
 }
 
-fieldset > button {
-	margin-bottom: 0;
+@container (max-width: #{map-get(pico.$breakpoints, 'sm')}) {
+	fieldset > button {
+		margin-bottom: 0;
+	}
 }
 
 button.inline {
