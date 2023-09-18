@@ -1,15 +1,16 @@
 <script lang="ts">
 	import Key from '$lib/components/Key.svelte'
 	import KeySettings from '$lib/components/KeySettings.svelte'
+	import Popover from '$lib/components/Popover.svelte'
 	import { caseColor, perKeySettings } from '$lib/stores/store'
-	import { onMount, tick, type ComponentEvents } from 'svelte'
+	import { onMount, type ComponentEvents } from 'svelte'
 
 	type KeyEvents = ComponentEvents<Key>
 
 	let loading = true
 	onMount(() => (loading = false))
 
-	let keySettingsDialog: HTMLDialogElement
+	let keySettingsOpen = false
 	let keySettingsContainer: HTMLDivElement
 	let keySettingsIndex: number | null
 	let keyTop: string
@@ -24,25 +25,17 @@
 		keyLeft = event.detail.rect.left + 'px'
 		keyWidth = event.detail.rect.width + 'px'
 
-		keySettingsDialog.showModal()
-		await tick()
+		keySettingsOpen = true
 		keySettingsContainer.scrollTo(0, 0)
 		keySettingsScroll()
 	}
 
 	function keySettingsScroll() {
-		keySettingsOverflowTop = keySettingsDialog ? keySettingsContainer.scrollTop > 10 : false
-		keySettingsOverflowBottom = keySettingsDialog
+		keySettingsOverflowTop = keySettingsOpen ? keySettingsContainer.scrollTop > 10 : false
+		keySettingsOverflowBottom = keySettingsOpen
 			? keySettingsContainer.scrollTop + keySettingsContainer.clientHeight <
 			  keySettingsContainer.scrollHeight - 10
 			: false
-	}
-
-	function closeKeySettings() {
-		keySettingsDialog.close()
-		keySettingsDialog.addEventListener('transitionend', () => (keySettingsIndex = null), {
-			once: true,
-		})
 	}
 </script>
 
@@ -58,8 +51,7 @@
 	{/each}
 </section>
 
-<dialog bind:this={keySettingsDialog}>
-	<button class="close-dialog" on:click={closeKeySettings} aria-label="Close Key Settings" />
+<Popover bind:open={keySettingsOpen} on:close={() => (keySettingsIndex = null)}>
 	<div
 		bind:this={keySettingsContainer}
 		class="key-settings"
@@ -72,7 +64,7 @@
 	>
 		<KeySettings keyIndex={keySettingsIndex} />
 	</div>
-</dialog>
+</Popover>
 
 <style lang="scss">
 	.keyboard {
@@ -88,37 +80,6 @@
 
 	.keyboard.loading {
 		filter: blur(0.5rem);
-	}
-
-	dialog {
-		display: block;
-		background: none;
-		backdrop-filter: none;
-		opacity: 0;
-		transition: opacity var(--transition);
-
-		&:not([open]) {
-			pointer-events: none;
-		}
-
-		&[open] {
-			opacity: 1;
-		}
-
-		&::backdrop {
-			background: none;
-		}
-	}
-
-	.close-dialog {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: none;
-		border: none;
-		cursor: default;
 	}
 
 	.key-settings {
