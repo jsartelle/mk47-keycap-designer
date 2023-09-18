@@ -110,3 +110,7 @@ label > :is(input:not([type]), input[type='text']) {
 		);
 	}
 }
+
+.lucide-icon {
+	translate: 0 -2px;
+}
