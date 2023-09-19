@@ -76,7 +76,7 @@
 		overflow: hidden;
 		background: var(--background);
 		border: none;
-		border-radius: var(--border-radius);
+		border-radius: 0.25rem;
 		margin: 0;
 		padding: calc(10% / var(--width, 1));
 		grid-column-end: span var(--width, 1);
