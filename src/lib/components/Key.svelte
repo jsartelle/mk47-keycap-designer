@@ -50,7 +50,7 @@
 	on:click={dispatchClick}
 	aria-label={label}
 	data-width={width}
-	class:settings-open={settingsOpen}
+	class:settingsOpen
 	style:--width={width}
 	style:--font-base={$settings.fontBase || $globalKeySettings.fontBase}
 	style:--font-layer1={$settings.fontLayer1 || $globalKeySettings.fontLayer1}
@@ -92,7 +92,7 @@
 		aspect-ratio: 1 / 1;
 	}
 
-	.key.settings-open {
+	.key.settingsOpen {
 		box-shadow: 0 0 calc(var(--spacing) / 2) calc(var(--spacing) / 4)
 			var(--form-element-border-color);
 	}
