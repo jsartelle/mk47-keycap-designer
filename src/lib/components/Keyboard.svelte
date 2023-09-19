@@ -41,7 +41,7 @@
 <Popover
 	bind:open={keySettingsOpen}
 	top={keyTop}
-	left={keyLeft + keyWidth / 2}
+	centerLeft={keyLeft + keyWidth / 2}
 	on:close={() => (keySettingsIndex = null)}
 >
 	<KeySettings keyIndex={keySettingsIndex} />

@@ -3,8 +3,10 @@
 
 	export let open: boolean
 	export let width = 300
+	/** Y position of the top of the popover */
 	export let top: number
-	export let left: number
+	/** X position of the center of the popover */
+	export let centerLeft: number
 
 	let dialog: HTMLDialogElement
 	let contents: HTMLDivElement
@@ -53,7 +55,7 @@
 		class:overflowTop
 		class:overflowBottom
 		style:--width={width + 'px'}
-		style:--left={left + 'px'}
+		style:--left={centerLeft + 'px'}
 		style:--top={top + 'px'}
 		on:scroll={measureOverflow}
 	>
