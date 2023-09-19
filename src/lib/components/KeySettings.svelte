@@ -42,6 +42,7 @@
 	{/if}
 	<!-- TODO disable if Lucide icon is being used -->
 	<KeySettingsTextInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
+	<!-- TODO look at https://github.com/untemps/svelte-palette?tab=readme-ov-file for a palette of currently used colors -->
 	<KeySettingsColorInput option="background" {keyStore} label="Background" />
 	<KeySettingsColorInput option="colorBase" {keyStore} label="Color" />
 </fieldset>
