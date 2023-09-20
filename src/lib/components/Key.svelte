@@ -10,6 +10,13 @@
 	export let width = 1
 	export let settingsOpen = false
 
+	const dispatch = createEventDispatcher<{
+		click: {
+			index: number
+			rect: DOMRect
+		}
+	}>()
+
 	let key: HTMLButtonElement
 	let legendBase: HTMLDivElement
 	let legendLayer1: HTMLDivElement
@@ -29,13 +36,6 @@
 		iconSizeLayer2 = parseInt(getComputedStyle(legendLayer2).fontSize)
 	}
 	onMount(measureIconSizes)
-
-	const dispatch = createEventDispatcher<{
-		click: {
-			index: number
-			rect: DOMRect
-		}
-	}>()
 
 	function dispatchClick() {
 		dispatch('click', { index, rect: key.getBoundingClientRect() })

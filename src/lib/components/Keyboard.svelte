@@ -16,6 +16,8 @@
 	let keyLeft: number
 	let keyWidth: number
 
+	$: if (!keySettingsOpen) keySettingsIndex = null
+
 	async function openKeySettings(event: KeyEvents['click']) {
 		keySettingsIndex = event.detail.index
 		keyTop = event.detail.rect.bottom
@@ -38,12 +40,7 @@
 	{/each}
 </section>
 
-<Popover
-	bind:open={keySettingsOpen}
-	top={keyTop}
-	centerLeft={keyLeft + keyWidth / 2}
-	on:close={() => (keySettingsIndex = null)}
->
+<Popover bind:open={keySettingsOpen} top={keyTop} centerLeft={keyLeft + keyWidth / 2}>
 	<KeySettings keyIndex={keySettingsIndex} />
 </Popover>
 

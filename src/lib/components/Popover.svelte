@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte'
-
 	export let open: boolean
-	export let width = 300
 	/** Y position of the top of the popover */
 	export let top: number
 	/** X position of the center of the popover */
 	export let centerLeft: number
+	export let width = 300
 
 	let dialog: HTMLDialogElement
 	let contents: HTMLDivElement
@@ -14,29 +12,23 @@
 	let overflowTop = false
 	let overflowBottom = false
 
-	const dispatch = createEventDispatcher<{
-		close: void
-	}>()
-
 	$: if (dialog) {
-		if (open) {
-			openDialog()
-		} else if (dialog.open) {
-			closeDialog()
-		}
+		open ? openDialog() : closeDialog()
 	}
 
 	function openDialog() {
+		if (dialog.open) return
 		dialog.showModal()
 		contents.scrollTo(0, 0)
 		measureOverflow()
 	}
 
 	function closeDialog() {
-		dialog.close()
-		contents.addEventListener('transitionend', () => dispatch('close'), {
+		if (!dialog.open) return
+		contents.addEventListener('transitionend', () => (open = false), {
 			once: true,
 		})
+		dialog.close()
 	}
 
 	function measureOverflow() {
@@ -48,7 +40,7 @@
 </script>
 
 <dialog bind:this={dialog}>
-	<button class="close-dialog" on:click={() => (open = false)} aria-label="Close Popover" />
+	<button class="close-dialog" on:click={closeDialog} aria-label="Close Popover" />
 	<div
 		bind:this={contents}
 		class="contents"
@@ -84,7 +76,7 @@
 	}
 
 	.close-dialog {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -95,7 +87,7 @@
 	}
 
 	.contents {
-		position: absolute;
+		position: fixed;
 		left: clamp(
 			var(--spacing),
 			calc(var(--left) - var(--width) / 2),
@@ -116,7 +108,7 @@
 		transition: scale var(--transition);
 		container-type: inline-size;
 
-		dialog[open] & {
+		dialog[open] > & {
 			scale: 1;
 			transition: scale var(--transition-bounce);
 		}
