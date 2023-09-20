@@ -15,7 +15,7 @@ vi.stubGlobal('localStorage', {
 	setItem: vi.fn(),
 })
 
-const { resettablePersistent } = await import('$lib/stores/store')
+const { default: resettablePersistent } = await import('$lib/utils/ResettablePersistent')
 
 describe('ResettablePersistent', () => {
 	it('should check localStorage for value on creation', () => {

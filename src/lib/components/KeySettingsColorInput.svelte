@@ -1,10 +1,7 @@
 <script lang="ts">
 	import ResetButton from '$lib/components/ResetButton.svelte'
-	import {
-		globalKeySettings,
-		type GlobalSettings,
-		type ResettablePersistent,
-	} from '$lib/stores/store'
+	import { globalKeySettings, type GlobalSettings } from '$lib/stores/store'
+	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
 	import { onDestroy } from 'svelte'
 
 	export let option: keyof GlobalSettings

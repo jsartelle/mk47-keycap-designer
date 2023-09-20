@@ -1,7 +1,8 @@
 <script lang="ts">
 	import KeySettingsColorInput from '$lib/components/KeySettingsColorInput.svelte'
 	import KeySettingsTextInput from '$lib/components/KeySettingsTextInput.svelte'
-	import { perKeySettings, type KeySettings, type ResettablePersistent } from '$lib/stores/store'
+	import { perKeySettings, type KeySettings } from '$lib/stores/store'
+	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
 
 	export let keyIndex: number | null = null
 

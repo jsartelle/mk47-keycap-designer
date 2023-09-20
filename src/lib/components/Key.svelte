@@ -1,6 +1,7 @@
 <script lang="ts">
 	import KeyLegend from '$lib/components/KeyLegend.svelte'
-	import { globalKeySettings, type KeySettings, type ResettablePersistent } from '$lib/stores/store'
+	import { globalKeySettings, type KeySettings } from '$lib/stores/store'
+	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
 	import { createEventDispatcher, onMount } from 'svelte'
 
 	export let index = 0
