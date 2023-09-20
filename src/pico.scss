@@ -1,4 +1,7 @@
-@use '@picocss/pico/scss/pico';
+@use '@picocss/pico/scss/pico' with (
+  $semantic-root-element: '#root',
+  $enable-semantic-container: true
+);
 
 /* change when Pico's grids collapse */
 @media (min-width: map-get(pico.$breakpoints, 'sm')) {

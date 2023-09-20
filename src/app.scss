@@ -1,13 +1,11 @@
 /* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
 @use 'sass:meta';
-@use '@picocss/pico/scss/pico' with (
-	$semantic-root-element: '#root',
-	$enable-semantic-container: true
-);
 
 @layer pico {
 	@include meta.load-css('pico');
 }
+
+$picoBreakpointSm: 576px;
 
 :root {
 	--border-radius: 0.5rem;
@@ -31,7 +29,7 @@ fieldset {
 	gap: var(--spacing);
 }
 
-@container (max-width: #{map-get(pico.$breakpoints, 'sm')}) {
+@container (max-width: $picoBreakpointSm) {
 	fieldset > button {
 		margin-bottom: 0;
 	}
@@ -39,7 +37,7 @@ fieldset {
 
 button.inline {
 	// become full width again in small containers
-	@container (max-width: #{map-get(pico.$breakpoints, 'sm')}) {
+	@container (max-width: $picoBreakpointSm) {
 		&:not(.noexpand) {
 			display: block;
 			width: 100%;
