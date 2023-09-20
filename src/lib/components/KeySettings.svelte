@@ -39,7 +39,13 @@
 <h3>Base</h3>
 <fieldset>
 	{#if $keyStore}
-		<KeySettingsTextInput option="legendBase" {keyStore} iconPicker={true} label="Legend" />
+		<KeySettingsTextInput
+			option="legendBase"
+			{keyStore}
+			iconPicker={true}
+			on:iconPicker
+			label="Legend"
+		/>
 	{/if}
 	<!-- TODO disable if Lucide icon is being used -->
 	<KeySettingsTextInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
@@ -51,7 +57,13 @@
 <h3>Layer 1</h3>
 <fieldset>
 	{#if $keyStore}
-		<KeySettingsTextInput option="legendLayer1" {keyStore} iconPicker={true} label="Legend" />
+		<KeySettingsTextInput
+			option="legendLayer1"
+			{keyStore}
+			iconPicker={true}
+			on:iconPicker
+			label="Legend"
+		/>
 	{/if}
 	<KeySettingsTextInput
 		option="fontLayer1"
@@ -65,7 +77,13 @@
 <h3>Layer 2</h3>
 <fieldset>
 	{#if $keyStore}
-		<KeySettingsTextInput option="legendLayer2" {keyStore} iconPicker={true} label="Legend" />
+		<KeySettingsTextInput
+			option="legendLayer2"
+			{keyStore}
+			iconPicker={true}
+			on:iconPicker
+			label="Legend"
+		/>
 	{/if}
 	<KeySettingsTextInput
 		option="fontLayer2"

@@ -1,16 +1,23 @@
 <script lang="ts">
-	import IconPicker from '$lib/components/IconPicker.svelte'
-	import Popover from '$lib/components/Popover.svelte'
 	import ResetButton from '$lib/components/ResetButton.svelte'
 	import { globalKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
 	import { LayoutGrid } from 'lucide-svelte'
+	import { createEventDispatcher } from 'svelte'
 
 	export let option: keyof KeySettings
 	export let keyStore: ResettablePersistent<KeySettings> | null
 	export let iconPicker = false
 	export let label: string
 	export let fallbackPlaceholder = ''
+
+	const dispatch = createEventDispatcher<{
+		iconPicker: {
+			store: ResettablePersistent<KeySettings>
+			option: keyof KeySettings
+			rect: DOMRect
+		}
+	}>()
 
 	let store: ResettablePersistent<any>
 	$: store = keyStore ?? globalKeySettings
@@ -26,16 +33,13 @@
 	}
 
 	let iconPickerButton: HTMLButtonElement
-	let iconPickerOpen = false
-	let iconPickerTop: number
-	let iconPickerCenterLeft: number
 
-	function openIconPicker() {
-		const rect = iconPickerButton.getBoundingClientRect()
-		iconPickerTop = rect.bottom
-		iconPickerCenterLeft = rect.left + rect.width / 2
-
-		iconPickerOpen = true
+	function dispatchIconPicker() {
+		dispatch('iconPicker', {
+			store: keyStore!,
+			option,
+			rect: iconPickerButton.getBoundingClientRect(),
+		})
 	}
 </script>
 
@@ -51,20 +55,14 @@
 		<button
 			bind:this={iconPickerButton}
 			class="inline noexpand outline secondary"
-			on:click={openIconPicker}
+			on:click={dispatchIconPicker}
+			aria-label="Choose Icon"
+			title="Choose Icon"
 		>
 			<LayoutGrid size={24} />
 		</button>
 	{/if}
 </label>
-
-<!-- FIXME fix close animation -->
-<!-- FIXME make this a single instance like key settings popup -->
-{#if iconPicker}
-	<Popover bind:open={iconPickerOpen} top={iconPickerTop} centerLeft={iconPickerCenterLeft}>
-		<IconPicker />
-	</Popover>
-{/if}
 
 <style lang="scss">
 	.iconPicker input {
