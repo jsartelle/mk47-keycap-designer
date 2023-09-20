@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let open: boolean
+	// TODO open above cursor if that would provide more space
 	/** Y position of the top of the popover */
 	export let top: number
 	/** X position of the center of the popover */

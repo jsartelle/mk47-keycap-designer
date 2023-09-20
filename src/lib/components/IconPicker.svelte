@@ -4,14 +4,16 @@
 
 	export let size = 24
 
-	// TODO add search
+	let query = ''
 
 	const dispatch = createEventDispatcher<{
 		icon: string
 	}>()
 
-	const icons: [string, any][] = Object.entries(imports).filter(([name, value]) => {
+	let icons: [string, any][]
+	$: icons = Object.entries(imports).filter(([name, value]) => {
 		return (
+			name.toLowerCase().includes(query.toLowerCase()) &&
 			!name.endsWith('Icon') &&
 			!name.startsWith('Lucide') &&
 			value.prototype instanceof SvelteComponent
@@ -19,7 +21,21 @@
 	})
 </script>
 
-<div>
+<div class="search">
+	<!-- svelte-ignore a11y-autofocus -->
+	<input type="search" name="search" autofocus bind:value={query} placeholder="Search..." />
+	{#if query}
+		<button
+			class="inline noexpand outline secondary"
+			on:click={() => (query = '')}
+			aria-label="Clear Search"
+			title="Clear Search"
+		>
+			<svelte:component this={imports.XCircle} size={24} />
+		</button>
+	{/if}
+</div>
+<div class="icons">
 	{#each icons as [name, icon]}
 		<button
 			class="inline noexpand outline contrast"
@@ -33,13 +49,35 @@
 </div>
 
 <style lang="scss">
-	div {
+	.search {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		padding-block: var(--spacing);
+		display: flex;
+		align-items: center;
+	}
+
+	.search input {
+		margin: 0;
+		padding-right: calc(var(--form-element-spacing-horizontal) * 2 + 24px);
+	}
+
+	.search button {
+		position: absolute;
+		right: var(--form-element-spacing-horizontal);
+		border: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.icons {
 		display: grid;
 		grid-template-columns: repeat(5, auto);
 		gap: calc(var(--spacing) / 2);
 	}
 
-	button {
+	.icons button {
 		aspect-ratio: 1 / 1;
 		border: 0;
 		padding: 0;

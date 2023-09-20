@@ -47,7 +47,6 @@
 	}
 
 	function iconSelected(event: IconPickerEvents['icon']) {
-		console.log(event.detail)
 		$iconPickerStore[iconPickerOption] = `lucide:${event.detail}`
 		iconPickerOpen = false
 	}

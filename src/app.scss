@@ -79,7 +79,9 @@ label > input {
 	margin: var(--spacing) 0;
 }
 
-label > :is(input:not([type]), input[type='text']) {
+input:not([type]),
+input[type='text'],
+input[type='search'] {
 	max-width: 100cqw;
 
 	+ .field-title {
@@ -105,7 +107,7 @@ label > :is(input:not([type]), input[type='text']) {
 		margin-bottom: var(--spacing);
 	}
 
-	label > input:not([type='checkbox'], [type='radio'], [type='range']) {
+	input:not([type='checkbox'], [type='radio'], [type='range']) {
 		height: calc(
 			0.5rem * var(--line-height) + var(--form-element-spacing-vertical) * 2 + var(--border-width) *
 				2
