@@ -124,6 +124,7 @@
 	.legend-layer2 {
 		color: var(--color-layer2);
 		font-family: var(--font-layer2);
+		align-items: flex-end;
 		text-align: right;
 	}
 </style>
