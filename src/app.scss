@@ -29,7 +29,7 @@ fieldset {
 	gap: var(--spacing);
 }
 
-@container (max-width: $picoBreakpointSm) {
+@container (max-width: #{$picoBreakpointSm}) {
 	fieldset > button {
 		margin-bottom: 0;
 	}
@@ -37,7 +37,7 @@ fieldset {
 
 button.inline {
 	// become full width again in small containers
-	@container (max-width: $picoBreakpointSm) {
+	@container (max-width: #{$picoBreakpointSm}) {
 		&:not(.noexpand) {
 			display: block;
 			width: 100%;
