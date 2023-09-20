@@ -1,13 +1,13 @@
 <script lang="ts">
-	import KeySettings from '$lib/components/KeySettings.svelte'
 	import Keyboard from '$lib/components/Keyboard.svelte'
 	import ResetButton from '$lib/components/ResetButton.svelte'
+	import SettingsPage from '$lib/components/SettingsPage.svelte'
 	import {
 		caseColor,
 		globalKeySettings,
 		perKeySettings,
 		type GlobalSettings,
-		type KeySettings as KeySettingsType,
+		type KeySettings,
 	} from '$lib/stores/store'
 	import { HardDriveDownload, HardDriveUpload } from 'lucide-svelte'
 	import { get } from 'svelte/store'
@@ -15,7 +15,7 @@
 	interface SettingsExport {
 		caseColor: string
 		globalKeySettings: GlobalSettings
-		perKeySettings: KeySettingsType[]
+		perKeySettings: KeySettings[]
 	}
 
 	let downloadLink: HTMLAnchorElement
@@ -123,7 +123,7 @@
 		</fieldset>
 
 		<h2>Keys</h2>
-		<KeySettings />
+		<SettingsPage />
 
 		<h2>Save/Load</h2>
 		<fieldset>
@@ -159,7 +159,7 @@
 		margin-left: var(--spacing-small);
 	}
 
-	[aria-hidden="true"] {
+	[aria-hidden='true'] {
 		display: none;
 	}
 </style>

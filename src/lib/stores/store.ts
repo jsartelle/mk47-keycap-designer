@@ -10,7 +10,6 @@ export interface GlobalSettings {
 	fontLayer2: string
 }
 
-// FIXME need to rename this type or the component
 export interface KeySettings extends Partial<GlobalSettings> {
 	legendBase: string
 	legendLayer1: string

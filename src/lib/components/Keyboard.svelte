@@ -1,14 +1,14 @@
 <script lang="ts">
 	import IconPicker from '$lib/components/IconPicker.svelte'
 	import Key from '$lib/components/Key.svelte'
-	import KeySettings from '$lib/components/KeySettings.svelte'
 	import Popover from '$lib/components/Popover.svelte'
-	import { caseColor, perKeySettings, type KeySettings as KeySettingsType } from '$lib/stores/store'
+	import SettingsPage from '$lib/components/SettingsPage.svelte'
+	import { caseColor, perKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
 	import { onMount, type ComponentEvents } from 'svelte'
 
 	type KeyEvents = ComponentEvents<Key>
-	type KeySettingsEvents = ComponentEvents<KeySettings>
+	type KeySettingsEvents = ComponentEvents<SettingsPage>
 	type IconPickerEvents = ComponentEvents<IconPicker>
 
 	let loading = true
@@ -22,8 +22,8 @@
 
 	$: if (!keySettingsOpen) keySettingsIndex = null
 
-	let iconPickerStore: ResettablePersistent<KeySettingsType>
-	let iconPickerOption: keyof KeySettingsType
+	let iconPickerStore: ResettablePersistent<KeySettings>
+	let iconPickerOption: keyof KeySettings
 	let iconPickerOpen = false
 	let iconPickerTop: number
 	let iconPickerCenterLeft: number
@@ -66,7 +66,7 @@
 </section>
 
 <Popover bind:open={keySettingsOpen} top={keyTop} centerLeft={keyCenterLeft}>
-	<KeySettings keyIndex={keySettingsIndex} on:iconPicker={openIconPicker} />
+	<SettingsPage keyIndex={keySettingsIndex} on:iconPicker={openIconPicker} />
 </Popover>
 
 <!-- FIXME fix z-index on close animation -->
