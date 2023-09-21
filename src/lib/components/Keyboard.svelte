@@ -75,6 +75,8 @@
 
 <style lang="scss">
 	.keyboard {
+		--spacing: 1em;
+		--spacing-small: 0.5em;
 		background: var(--background);
 		border-radius: var(--border-radius);
 		padding: var(--spacing-small);
