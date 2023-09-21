@@ -36,7 +36,7 @@
 	{/if}
 </div>
 <div class="icons">
-	{#each icons as [name, icon]}
+	{#each icons as [name, icon] (name)}
 		<button
 			class="inline noexpand outline contrast"
 			on:click={() => dispatch('icon', name)}
