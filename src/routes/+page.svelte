@@ -120,6 +120,7 @@
 					<ResetButton on:click={caseColor.reset} label="Reset Case Color" />
 				{/if}
 			</label>
+			<!-- TODO add option to make keys transparent -->
 		</fieldset>
 
 		<h2>Keys</h2>
