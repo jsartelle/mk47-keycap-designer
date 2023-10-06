@@ -33,6 +33,6 @@
 	"type": "module",
 	"dependencies": {
 		"@picocss/pico": "^1.5.10",
-		"lucide-svelte": "^0.277.0"
+		"lucide-svelte": "^0.284.0"
 	}
 }
