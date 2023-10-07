@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as imports from 'lucide-svelte'
-	import { SvelteComponent, createEventDispatcher } from 'svelte'
+	import { createEventDispatcher } from 'svelte'
 
 	export let size = 24
 
@@ -10,13 +10,20 @@
 		icon: string
 	}>()
 
+	/** https://github.com/sveltejs/svelte/issues/3360#issuecomment-518657022  */
+	function isSvelteComponent(thing: any) {
+		return thing && typeof window !== 'undefined'
+			? typeof thing.prototype?.$destroy === 'function' // client-side
+			: typeof thing.render === 'function' // server-side
+	}
+
 	let icons: [string, any][]
 	$: icons = Object.entries(imports).filter(([name, value]) => {
 		return (
 			name.toLowerCase().includes(query.toLowerCase()) &&
 			!name.endsWith('Icon') &&
 			!name.startsWith('Lucide') &&
-			value.prototype instanceof SvelteComponent
+			isSvelteComponent(value)
 		)
 	})
 </script>
