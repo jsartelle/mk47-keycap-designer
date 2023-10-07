@@ -5,6 +5,7 @@
 	import {
 		caseColor,
 		globalKeySettings,
+		hideLegends,
 		perKeySettings,
 		type GlobalSettings,
 		type KeySettings,
@@ -120,7 +121,10 @@
 					<ResetButton on:click={caseColor.reset} label="Reset Case Color" />
 				{/if}
 			</label>
-			<!-- TODO add option to make keys transparent -->
+			<label>
+				<input type="checkbox" role="switch" bind:checked={$hideLegends} />
+				<span>Hide Legends</span>
+			</label>
 		</fieldset>
 
 		<h2>Keys</h2>

@@ -1,4 +1,5 @@
 import resettablePersistent from '$lib/utils/ResettablePersistent'
+import { writable } from 'svelte/store'
 
 export interface GlobalSettings {
 	background: string
@@ -94,3 +95,5 @@ export const perKeySettings = new Map(
 		),
 	]),
 )
+
+export const hideLegends = writable(false)

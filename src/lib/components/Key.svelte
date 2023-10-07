@@ -1,6 +1,6 @@
 <script lang="ts">
 	import KeyLegend from '$lib/components/KeyLegend.svelte'
-	import { globalKeySettings, type KeySettings } from '$lib/stores/store'
+	import { globalKeySettings, hideLegends, type KeySettings } from '$lib/stores/store'
 	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
 	import { createEventDispatcher, onMount } from 'svelte'
 
@@ -52,6 +52,7 @@
 	aria-label={label}
 	data-width={width}
 	class:settingsOpen
+	class:hideLegends={$hideLegends}
 	style:--width={width}
 	style:--font-base={$settings.fontBase || $globalKeySettings.fontBase}
 	style:--font-layer1={$settings.fontLayer1 || $globalKeySettings.fontLayer1}
@@ -106,6 +107,11 @@
 		justify-content: flex-end;
 		font-size: 30cqh;
 		line-height: 1;
+		transition: opacity var(--transition);
+	}
+
+	.key.hideLegends > * {
+		opacity: 0;
 	}
 
 	.legend-base {
