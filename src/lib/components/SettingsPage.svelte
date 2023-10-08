@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SettingsColorInput from '$lib/components/SettingsColorInput.svelte'
-	import SettingsTextInput from '$lib/components/SettingsTextInput.svelte'
+	import SettingsInput from '$lib/components/SettingsInput.svelte'
 	import { perKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
 
@@ -42,16 +42,10 @@
 <h3>Base</h3>
 <fieldset>
 	{#if $keyStore}
-		<SettingsTextInput
-			option="legendBase"
-			{keyStore}
-			iconPicker={true}
-			on:iconPicker
-			label="Legend"
-		/>
+		<SettingsInput option="legendBase" {keyStore} iconPicker={true} on:iconPicker label="Legend" />
 	{/if}
-	<SettingsTextInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
-	<SettingsTextInput
+	<SettingsInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
+	<SettingsInput
 		option="sizeBase"
 		range={true}
 		{keyStore}
@@ -66,7 +60,7 @@
 <h3>Layer 1</h3>
 <fieldset>
 	{#if $keyStore}
-		<SettingsTextInput
+		<SettingsInput
 			option="legendLayer1"
 			{keyStore}
 			iconPicker={true}
@@ -74,8 +68,8 @@
 			label="Legend"
 		/>
 	{/if}
-	<SettingsTextInput option="fontLayer1" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
-	<SettingsTextInput
+	<SettingsInput option="fontLayer1" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
+	<SettingsInput
 		option="sizeLayer1"
 		range={true}
 		{keyStore}
@@ -88,7 +82,7 @@
 <h3>Layer 2</h3>
 <fieldset>
 	{#if $keyStore}
-		<SettingsTextInput
+		<SettingsInput
 			option="legendLayer2"
 			{keyStore}
 			iconPicker={true}
@@ -96,8 +90,8 @@
 			label="Legend"
 		/>
 	{/if}
-	<SettingsTextInput option="fontLayer2" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
-	<SettingsTextInput
+	<SettingsInput option="fontLayer2" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
+	<SettingsInput
 		option="sizeLayer2"
 		range={true}
 		{keyStore}
@@ -110,7 +104,9 @@
 {#if $keyStore}
 	<h3>Reset</h3>
 	<fieldset>
-		<button class="inline contrast" on:click={resetStyles} data-tooltip="Fonts, sizes, and colors">Reset Key Styles</button>
+		<button class="inline contrast" on:click={resetStyles} data-tooltip="Fonts, sizes, and colors"
+			>Reset Key Styles</button
+		>
 		<button class="inline contrast" on:click={resetLegends}>Reset Legends</button>
 	</fieldset>
 {/if}

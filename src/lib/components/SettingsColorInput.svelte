@@ -20,7 +20,7 @@
 	// we're not using two-way binding here because we want to fall back
 	// to the global color if the per-key color isn't set
 	let value: string
-	$: value = perKeyValue?.[option] || $globalKeySettings[option]
+	$: value = (perKeyValue?.[option] || $globalKeySettings[option]) as string
 
 	function updateValue(newValue: string) {
 		$store[option] = newValue
