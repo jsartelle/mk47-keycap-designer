@@ -63,6 +63,8 @@
 		padding-block: var(--spacing);
 		display: flex;
 		align-items: center;
+		background: var(--background-color);
+		background-clip: content-box;
 	}
 
 	.search input {
