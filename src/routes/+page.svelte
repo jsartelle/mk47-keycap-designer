@@ -30,7 +30,7 @@
 		}
 	}
 
-	function resetKeyColorsFonts() {
+	function resetKeyStyles() {
 		if (confirm('Reset all key colors and fonts?')) {
 			perKeySettings.forEach((store) =>
 				store.update((value) => {
@@ -42,6 +42,9 @@
 					value.fontBase = initialValue.fontBase
 					value.fontLayer1 = initialValue.fontLayer1
 					value.fontLayer2 = initialValue.fontLayer2
+					value.sizeBase = initialValue.sizeBase
+					value.sizeLayer1 = initialValue.sizeLayer1
+					value.sizeLayer2 = initialValue.sizeLayer2
 					return value
 				}),
 			)
@@ -145,9 +148,13 @@
 		<h2>Reset</h2>
 		<fieldset>
 			<button class="inline contrast" on:click={resetGlobalSettings}>Reset Global Settings</button>
-			<button class="inline contrast" on:click={resetKeyColorsFonts}
-				>Reset All Key Colors & Fonts</button
+			<button
+				class="inline contrast"
+				on:click={resetKeyStyles}
+				data-tooltip="Fonts, sizes, and colors"
 			>
+				Reset All Key Styles
+			</button>
 			<button class="inline contrast" on:click={resetKeyLegends}>Reset All Key Legends</button>
 		</fieldset>
 	</section>

@@ -2,7 +2,7 @@
 	import KeyLegend from '$lib/components/KeyLegend.svelte'
 	import { globalKeySettings, hideLegends, type KeySettings } from '$lib/stores/store'
 	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
-	import { createEventDispatcher, onMount } from 'svelte'
+	import { createEventDispatcher } from 'svelte'
 
 	export let index = 0
 	export let settings: ResettablePersistent<KeySettings>
@@ -18,31 +18,15 @@
 	}>()
 
 	let key: HTMLButtonElement
-	let legendBase: HTMLDivElement
-	let legendLayer1: HTMLDivElement
-	let legendLayer2: HTMLDivElement
 
 	let label: string | undefined
 	$: label =
 		$settings.legendBase || $settings.legendLayer1 || $settings.legendLayer2 ? undefined : 'Blank'
 
-	let iconSizeBase: number
-	let iconSizeLayer1: number
-	let iconSizeLayer2: number
-
-	function measureIconSizes() {
-		iconSizeBase = parseInt(getComputedStyle(legendBase).fontSize)
-		iconSizeLayer1 = parseInt(getComputedStyle(legendLayer1).fontSize)
-		iconSizeLayer2 = parseInt(getComputedStyle(legendLayer2).fontSize)
-	}
-	onMount(measureIconSizes)
-
 	function dispatchClick() {
 		dispatch('click', { index, rect: key.getBoundingClientRect() })
 	}
 </script>
-
-<svelte:window on:resize={measureIconSizes} />
 
 <button
 	bind:this={key}
@@ -62,14 +46,23 @@
 	style:--color-layer1={$settings.colorLayer1 || $globalKeySettings.colorLayer1}
 	style:--color-layer2={$settings.colorLayer2 || $globalKeySettings.colorLayer2}
 >
-	<div class="legend-base" bind:this={legendBase}>
-		<KeyLegend name={$settings.legendBase} size={iconSizeBase} />
+	<div class="legend-base">
+		<KeyLegend
+			text={$settings.legendBase}
+			size={$settings.sizeBase || $globalKeySettings.sizeBase}
+		/>
 	</div>
-	<div class="legend-layer1" bind:this={legendLayer1}>
-		<KeyLegend name={$settings.legendLayer1} size={iconSizeLayer1} />
+	<div class="legend-layer1">
+		<KeyLegend
+			text={$settings.legendLayer1}
+			size={$settings.sizeLayer1 || $globalKeySettings.sizeLayer1}
+		/>
 	</div>
-	<div class="legend-layer2" bind:this={legendLayer2}>
-		<KeyLegend name={$settings.legendLayer2} size={iconSizeLayer2} />
+	<div class="legend-layer2">
+		<KeyLegend
+			text={$settings.legendLayer2}
+			size={$settings.sizeLayer2 || $globalKeySettings.sizeLayer2}
+		/>
 	</div>
 </button>
 
@@ -102,10 +95,6 @@
 	.key > * {
 		white-space: nowrap;
 		user-select: none;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
-		font-size: 30cqh;
 		line-height: 1;
 		transition: opacity var(--transition);
 	}
@@ -114,12 +103,15 @@
 		opacity: 0;
 	}
 
+	.key > :not(.legend-base) {
+		align-self: end;
+	}
+
 	.legend-base {
 		grid-column-start: span 2;
 		color: var(--color-base);
 		font-family: var(--font-base);
 		justify-content: flex-start;
-		font-size: 50cqh;
 	}
 
 	.legend-layer1 {

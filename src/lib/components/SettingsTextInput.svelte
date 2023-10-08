@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* TODO rename this component */
 	import ResetButton from '$lib/components/ResetButton.svelte'
 	import { globalKeySettings, type KeySettings } from '$lib/stores/store'
 	import type { ResettablePersistent } from '$lib/utils/ResettablePersistent'
@@ -6,7 +7,11 @@
 	import { createEventDispatcher } from 'svelte'
 
 	export let option: keyof KeySettings
+	export let range = false
 	export let keyStore: ResettablePersistent<KeySettings> | null
+	export let min = 0
+	export let max = 100
+	export let step = 5
 	export let iconPicker = false
 	export let label: string
 	export let fallbackPlaceholder = ''
@@ -44,7 +49,19 @@
 </script>
 
 <label class:iconPicker>
-	<input type="text" bind:value={$store[option]} {placeholder} />
+	{#if !range}
+		<input type="text" bind:value={$store[option]} {placeholder} />
+	{:else}
+		<input
+			type="range"
+			bind:value={$store[option]}
+			{min}
+			{max}
+			{step}
+			{placeholder}
+			inputmode="numeric"
+		/>
+	{/if}
 	<div class="field-title">
 		<span>{label}</span>
 		{#if modified}
@@ -67,6 +84,15 @@
 <style lang="scss">
 	.iconPicker input {
 		padding-right: calc(var(--form-element-spacing-horizontal) * 2 + 24px);
+	}
+
+	input[type='range'] + .field-title {
+		left: 0;
+		background: none;
+
+		@container (max-width: 300px) {
+			transform: none;
+		}
 	}
 
 	button {

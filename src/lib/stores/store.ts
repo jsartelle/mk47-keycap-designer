@@ -5,10 +5,13 @@ export interface GlobalSettings {
 	background: string
 	colorBase: string
 	fontBase: string
+	sizeBase: number
 	colorLayer1: string
 	fontLayer1: string
+	sizeLayer1: number
 	colorLayer2: string
 	fontLayer2: string
+	sizeLayer2: number
 }
 
 export interface KeySettings extends Partial<GlobalSettings> {
@@ -21,10 +24,13 @@ const initialGlobalSettings: GlobalSettings = {
 	background: '#19181a',
 	colorBase: '#ccdfee',
 	fontBase: '',
+	sizeBase: 50,
 	colorLayer1: '#8d0eec',
 	fontLayer1: '',
+	sizeLayer1: 30,
 	colorLayer2: '#43a7fc',
 	fontLayer2: '',
+	sizeLayer2: 30,
 }
 
 // TODO match factory settings

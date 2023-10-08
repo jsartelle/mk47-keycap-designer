@@ -9,7 +9,7 @@
 	let keyStore: ResettablePersistent<KeySettings> | null
 	$: keyStore = keyIndex !== null ? perKeySettings.get(keyIndex)! : null
 
-	function resetColorsFonts() {
+	function resetStyles() {
 		if (!keyStore) return
 		keyStore.update((value) => {
 			const initialValue = keyStore!.getInitialValue()
@@ -20,6 +20,9 @@
 			value.fontBase = initialValue.fontBase
 			value.fontLayer1 = initialValue.fontLayer1
 			value.fontLayer2 = initialValue.fontLayer2
+			value.sizeBase = initialValue.sizeBase
+			value.sizeLayer1 = initialValue.sizeLayer1
+			value.sizeLayer2 = initialValue.sizeLayer2
 			return value
 		})
 	}
@@ -47,8 +50,14 @@
 			label="Legend"
 		/>
 	{/if}
-	<!-- TODO disable if Lucide icon is being used -->
 	<SettingsTextInput option="fontBase" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
+	<SettingsTextInput
+		option="sizeBase"
+		range={true}
+		{keyStore}
+		label="Size"
+		fallbackPlaceholder="system-ui"
+	/>
 	<!-- TODO look at https://github.com/untemps/svelte-palette?tab=readme-ov-file for a palette of currently used colors -->
 	<SettingsColorInput option="background" {keyStore} label="Background" />
 	<SettingsColorInput option="colorBase" {keyStore} label="Color" />
@@ -66,6 +75,13 @@
 		/>
 	{/if}
 	<SettingsTextInput option="fontLayer1" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
+	<SettingsTextInput
+		option="sizeLayer1"
+		range={true}
+		{keyStore}
+		label="Size"
+		fallbackPlaceholder="system-ui"
+	/>
 	<SettingsColorInput option="colorLayer1" {keyStore} label="Color" />
 </fieldset>
 
@@ -81,13 +97,20 @@
 		/>
 	{/if}
 	<SettingsTextInput option="fontLayer2" {keyStore} label="Font" fallbackPlaceholder="system-ui" />
+	<SettingsTextInput
+		option="sizeLayer2"
+		range={true}
+		{keyStore}
+		label="Size"
+		fallbackPlaceholder="system-ui"
+	/>
 	<SettingsColorInput option="colorLayer2" {keyStore} label="Color" />
 </fieldset>
 
 {#if $keyStore}
 	<h3>Reset</h3>
 	<fieldset>
-		<button class="inline contrast" on:click={resetColorsFonts}>Reset Colors & Fonts</button>
+		<button class="inline contrast" on:click={resetStyles} data-tooltip="Fonts, sizes, and colors">Reset Key Styles</button>
 		<button class="inline contrast" on:click={resetLegends}>Reset Legends</button>
 	</fieldset>
 {/if}

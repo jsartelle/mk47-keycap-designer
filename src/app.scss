@@ -26,13 +26,7 @@ h6 {
 fieldset {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--spacing);
-}
-
-@container (max-width: #{$picoBreakpointSm}) {
-	fieldset > button {
-		margin-bottom: 0;
-	}
+	column-gap: var(--spacing);
 }
 
 button.inline {
@@ -65,7 +59,7 @@ input[type='color'] {
 label {
 	position: relative;
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: row;
 	align-items: center;
 	gap: var(--spacing-small);
 }
@@ -81,7 +75,8 @@ label > input {
 
 input:not([type]),
 input[type='text'],
-input[type='search'] {
+input[type='search'],
+input[type='range'] {
 	max-width: 100cqw;
 
 	+ .field-title {
@@ -101,6 +96,8 @@ input[type='search'] {
 @container (max-width: 300px) {
 	fieldset {
 		--spacing: 0.5rem;
+		flex-direction: column;
+		flex-wrap: nowrap;
 	}
 
 	fieldset legend {
@@ -112,5 +109,9 @@ input[type='search'] {
 			0.5rem * var(--line-height) + var(--form-element-spacing-vertical) * 2 + var(--border-width) *
 				2
 		);
+	}
+
+	input[type='range'] + .field-title {
+		position: static;
 	}
 }
