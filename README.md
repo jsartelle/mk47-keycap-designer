@@ -1,38 +1,7 @@
-# create-svelte
+# MK47 Keycap Designer
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A tool to design custom keycap sets for the [Inland MK47 keyboard](https://www.microcenter.com/product/661264/inland-47-keys-hot-swappable-rgb-wired-mechanical-keyboard,). Includes custom popover and icon picker components.
 
-## Creating a project
+Built using [Svelte](https://svelte.dev/) and [PicoCSS](https://picocss.com/).
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+![MK47 Keycap Designer](https://github.com/jsartelle/mk47-keycap-designer/assets/20188035/37f59377-7ad6-4e87-b432-5831378044b8)
